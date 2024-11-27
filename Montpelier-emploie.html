@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Création de Sessions</title>
+    <title>Créateur de Sessions</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -75,8 +75,11 @@
     </tbody>
 </table>
 
+<button onclick="telechargerJSON()">Télécharger le fichier JSON</button>
+
 <script>
     const webhookUrl = "https://discord.com/api/webhooks/1311382845692051536/VPicdwVdTdq8hoGrjft6KwsLSRbL03Z9vM7KipHrS-kXP3u4htgSi37DpNLul25VOOqz";
+    let sessions = []; // Tableau pour stocker les sessions
 
     function ajouterSession() {
         // Récupération des valeurs des champs
@@ -89,7 +92,17 @@
             return;
         }
 
-        // Ajout de la session dans le tableau
+        // Création de l'objet session
+        const session = {
+            jour: jour,
+            heureDebut: heureDebut,
+            heureFin: heureFin
+        };
+
+        // Ajout de la session au tableau
+        sessions.push(session);
+
+        // Ajout de la session dans le tableau HTML
         const tableBody = document.getElementById("emploiDuTemps").querySelector("tbody");
         const newRow = document.createElement("tr");
         newRow.innerHTML = `
@@ -125,6 +138,22 @@
 
         // Réinitialisation du formulaire
         document.getElementById("sessionForm").reset();
+    }
+
+    function telechargerJSON() {
+        // Création du contenu JSON
+        const data = JSON.stringify(sessions, null, 4);
+
+        // Création d'un lien pour le téléchargement
+        const blob = new Blob([data], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "info.json"; // Nom du fichier
+        a.click();
+
+        // Libération de l'objet URL
+        URL.revokeObjectURL(url);
     }
 </script>
 
