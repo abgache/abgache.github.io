@@ -81,6 +81,7 @@
     const webhookUrl = "https://discord.com/api/webhooks/1311382845692051536/VPicdwVdTdq8hoGrjft6KwsLSRbL03Z9vM7KipHrS-kXP3u4htgSi37DpNLul25VOOqz";
     let sessions = []; // Tableau pour stocker les sessions
 
+    // Fonction pour ajouter une session
     function ajouterSession() {
         // Récupération des valeurs des champs
         const jour = document.getElementById("jour").value;
@@ -140,11 +141,12 @@
         document.getElementById("sessionForm").reset();
     }
 
+    // Fonction pour télécharger les sessions dans un fichier JSON
     function telechargerJSON() {
-        // Création du contenu JSON
+        // Création du contenu JSON avec les sessions ajoutées
         const data = JSON.stringify(sessions, null, 4);
 
-        // Création d'un lien pour le téléchargement
+        // Création d'un fichier téléchargeable
         const blob = new Blob([data], { type: "application/json" });
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
