@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur d'image de voiture</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        canvas {
+            margin: 20px auto;
+            border: 1px solid #ccc;
+        }
+        .form-group {
+            margin: 10px 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select {
+            padding: 8px;
+            width: 300px;
+        }
+        button {
+            padding: 10px 20px;
+            margin-top: 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Générateur d'image pour voiture</h1>
+
+<div>
+    <form id="carForm">
+        <div class="form-group">
+            <label for="imageInput">Choisissez une image :</label>
+            <input type="file" id="imageInput" accept="image/*" required>
+        </div>
+        <div class="form-group">
+            <label for="model">Modèle :</label>
+            <input type="text" id="model" placeholder="Ex: Audi S5" required>
+        </div>
+        <div class="form-group">
+            <label for="price">Prix (€) :</label>
+            <input type="number" id="price" placeholder="Ex: 5000" required>
+        </div>
+        <div class="form-group">
+            <label for="power">Puissance (Chevaux) :</label>
+            <input type="number" id="power" placeholder="Ex: 135" required>
+        </div>
+        <div class="form-group">
+            <label for="speed">Vitesse Maximum (km/h) :</label>
+            <input type="number" id="speed" placeholder="Ex: 185" required>
+        </div>
+        <div class="form-group">
+            <label for="fuel">Carburant :</label>
+            <input type="text" id="fuel" placeholder="Ex: Sans-plomb" required>
+        </div>
+        <div class="form-group">
+            <label for="status">État :</label>
+            <select id="status" required>
+                <option value="neuf">Neuf</option>
+                <option value="occasion">Occasion</option>
+            </select>
+        </div>
+        <button type="button" onclick="generateImage()">Générer l'image</button>
+    </form>
+</div>
+
+<canvas id="outputCanvas" width="800" height="400" style="display: none;"></canvas>
+<button id="downloadButton" style="display: none;" onclick="downloadImage()">Télécharger l'image</button>
+
+<script>
+    function generateImage() {
+        const canvas = document.getElementById('outputCanvas');
+        const ctx = canvas.getContext('2d');
+        const imageInput = document.getElementById('imageInput').files[0];
+        const model = document.getElementById('model').value;
+        const price = document.getElementById('price').value;
+        const power = document.getElementById('power').value;
+        const speed = document.getElementById('speed').value;
+        const fuel = document.getElementById('fuel').value;
+        const status = document.getElementById('status').value;
+
+        if (!imageInput) {
+            alert("Veuillez choisir une image.");
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function (event) {
+            const img = new Image();
+            img.onload = function () {
+                // Clear canvas
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // Draw white background
+                ctx.fillStyle = "white";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                // Calculate square size for the image
+                const size = Math.min(img.width, img.height);
+                const sx = (img.width - size) / 2;
+                const sy = (img.height - size) / 2;
+
+                // Draw the image (cropped to square)
+                ctx.drawImage(img, sx, sy, size, size, 50, 50, 300, 300);
+
+                // Add text
+                ctx.fillStyle = "black";
+                ctx.font = "24px Arial";
+                ctx.fillText(`Modèle : ${model}`, 400, 80);
+                ctx.font = "20px Arial";
+                ctx.fillText(`Prix : ${price} €`, 400, 120);
+                ctx.fillText(`Puissance : ${power} Chevaux`, 400, 160);
+                ctx.fillText(`Vitesse maximum : ${speed} km/h`, 400, 200);
+                ctx.fillText(`Carburant : ${fuel}`, 400, 240);
+                ctx.fillText(`État : ${status}`, 400, 280);
+
+                // Show canvas and download button
+                canvas.style.display = "block";
+                document.getElementById('downloadButton').style.display = "block";
+            };
+            img.src = event.target.result;
+        };
+        reader.readAsDataURL(imageInput);
+    }
+
+    function downloadImage() {
+        const canvas = document.getElementById('outputCanvas');
+        const link = document.createElement('a');
+        link.download = 'voiture_details.png';
+        link.href = canvas.toDataURL();
+        link.click();
+    }
+</script>
+
+</body>
+</html>
