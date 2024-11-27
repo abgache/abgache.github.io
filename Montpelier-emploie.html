@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Création de Sessions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input, button, select {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        button {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Créateur de Sessions</h1>
+
+<form id="sessionForm">
+    <label for="jour">Jour :</label>
+    <select id="jour" required>
+        <option value="Lundi">Lundi</option>
+        <option value="Mardi">Mardi</option>
+        <option value="Mercredi">Mercredi</option>
+        <option value="Jeudi">Jeudi</option>
+        <option value="Vendredi">Vendredi</option>
+        <option value="Samedi">Samedi</option>
+        <option value="Dimanche">Dimanche</option>
+    </select>
+
+    <label for="heureDebut">Heure de début :</label>
+    <input type="time" id="heureDebut" required>
+
+    <label for="heureFin">Heure de fin :</label>
+    <input type="time" id="heureFin" required>
+
+    <button type="button" onclick="ajouterSession()">Créer Session</button>
+</form>
+
+<h2>Emploi du Temps</h2>
+<table id="emploiDuTemps">
+    <thead>
+        <tr>
+            <th>Jour</th>
+            <th>Heure de Début</th>
+            <th>Heure de Fin</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Les sessions seront ajoutées ici -->
+    </tbody>
+</table>
+
+<script>
+    const webhookUrl = "https://discord.com/api/webhooks/1311382845692051536/VPicdwVdTdq8hoGrjft6KwsLSRbL03Z9vM7KipHrS-kXP3u4htgSi37DpNLul25VOOqz";
+
+    function ajouterSession() {
+        // Récupération des valeurs des champs
+        const jour = document.getElementById("jour").value;
+        const heureDebut = document.getElementById("heureDebut").value;
+        const heureFin = document.getElementById("heureFin").value;
+
+        if (!heureDebut || !heureFin) {
+            alert("Veuillez remplir tous les champs.");
+            return;
+        }
+
+        // Ajout de la session dans le tableau
+        const tableBody = document.getElementById("emploiDuTemps").querySelector("tbody");
+        const newRow = document.createElement("tr");
+        newRow.innerHTML = `
+            <td>${jour}</td>
+            <td>${heureDebut}</td>
+            <td>${heureFin}</td>
+        `;
+        tableBody.appendChild(newRow);
+
+        // Envoi du message au webhook Discord
+        const message = {
+            content: `||@everyone|| Session **${jour}** de **${heureDebut}** à **${heureFin}**`,
+        };
+
+        fetch(webhookUrl, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(message)
+        })
+        .then(response => {
+            if (response.ok) {
+                alert("Session ajoutée et message envoyé sur Discord !");
+            } else {
+                alert("Erreur lors de l'envoi du message au webhook Discord.");
+            }
+        })
+        .catch(error => {
+            console.error("Erreur :", error);
+            alert("Impossible de contacter le webhook.");
+        });
+
+        // Réinitialisation du formulaire
+        document.getElementById("sessionForm").reset();
+    }
+</script>
+
+</body>
+</html>
