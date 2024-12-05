@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculer la Moyenne Pronote</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-size: 16px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8d7da;
+            color: #721c24;
+            border-radius: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Calculer la Moyenne Pronote</h2>
+        <div class="form-group">
+            <label for="username">Identifiant Pronote :</label>
+            <input type="text" id="username" placeholder="Entrez votre identifiant Pronote" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" placeholder="Entrez votre mot de passe" required>
+        </div>
+        <button id="submit">Calculer Moyenne</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById("submit").addEventListener("click", function() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            if (username && password) {
+                var data = {
+                    username: username,
+                    password: password
+                };
+
+                // Envoi des données à un serveur Python via AJAX
+                fetch("http://127.0.0.1:5000/calculer_moyenne", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(result => {
+                    document.getElementById("result").style.display = "block";
+                    document.getElementById("result").innerHTML = "Votre moyenne est : " + result.moyenne + "/20";
+                })
+                .catch(error => {
+                    document.getElementById("result").style.display = "block";
+                    document.getElementById("result").innerHTML = "Erreur de connexion ou de récupération des notes.";
+                });
+            } else {
+                alert("Veuillez entrer votre identifiant et mot de passe.");
+            }
+        });
+    </script>
+
+</body>
+</html>
