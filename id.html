@@ -16,7 +16,8 @@
     </style>
 </head>
 <body>
-    <h1>Créer votre carte d'identité Roblox</h1>
+    <h1>Créer votre carte d'identité EH RP </h1>
+    <p>made by abgache, V1.1</p>
     <form id="idForm">
         <label for="skin">Image du skin :</label>
         <input type="file" id="skin" accept="image/*" required><br><br>
@@ -43,14 +44,13 @@
         <button type="button" id="generateButton">Générer</button>
     </form>
 
-    <canvas id="canvas" width="800" height="500"></canvas><br>
-    <button id="sendButton" style="display: none;">Envoyer au webhook</button>
+    <canvas id="canvas" width="800" height="500"></canvas>
 
     <script>
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         const templateImage = new Image();
-        templateImage.src = "template.jpg"; // Placez votre template ici
+        templateImage.src = "template.jpg"; // Remplacez par le chemin de votre template
 
         document.getElementById('generateButton').addEventListener('click', async () => {
             const skinInput = document.getElementById('skin');
@@ -70,34 +70,36 @@
             const reader = new FileReader();
 
             reader.onload = function (e) {
-            skinImage.src = e.target.result;
+                skinImage.src = e.target.result;
 
-            skinImage.onload = function () {
-                // Charger le template
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.drawImage(templateImage, 0, 0, canvas.width, canvas.height);
+                skinImage.onload = function () {
+                    // Charger le template
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(templateImage, 0, 0, canvas.width, canvas.height);
 
-                // Dessiner l'image du skin en étirant pour occuper la zone définie
-                ctx.drawImage(skinImage, 35, 111, 221, 255); // Étirement exact selon les coordonnées fournies
+                    // Dessiner l'image du skin
+                    ctx.drawImage(skinImage, 35, 111, 221, 255);
 
-                // Ajouter les textes
-                ctx.font = "16px Arial";
-                ctx.fillStyle = "black";
-                ctx.textAlign = "left";
+                    // Ajouter les textes
+                    ctx.font = "16px Arial";
+                    ctx.fillStyle = "black";
+                    ctx.textAlign = "left";
 
-                // Afficher les données aux nouvelles coordonnées
-                ctx.fillText(nom, 320, 133);               // Nom à (320, 133)
-                ctx.fillText(prenom, 355, 180);            // Prénom à (355, 180)
-                ctx.fillText(sexe, 321, 230);              // Sexe à (321, 230)
-                ctx.fillText(dateNaissance, 540, 228);     // Date de naissance à (540, 228)
+                    ctx.fillText(nom, 320, 133);               // Nom
+                    ctx.fillText(prenom, 355, 180);            // Prénom
+                    ctx.fillText(sexe, 321, 230);              // Sexe
+                    ctx.fillText(dateNaissance, 540, 228);     // Date de naissance
+                    ctx.fillText(`${taille} m`, 540, 270);     // Taille
+
+                    // Envoyer l'image au webhook automatiquement
+                    sendToWebhook();
+                };
             };
-        };
-
 
             reader.readAsDataURL(skinFile);
         });
 
-        document.getElementById('sendButton').addEventListener('click', () => {
+        function sendToWebhook() {
             const webhookURL = "https://discord.com/api/webhooks/1315009679335751720/nQcqmHMjJeZtQQFEQ4DoTZaYe3XPjSKuCm4fuUNY3TrZInEYmfRE_bmewvPiCbtmRulD";
 
             // Convertir le canvas en Blob (image)
@@ -122,7 +124,7 @@
                     alert("Une erreur s'est produite lors de l'envoi.");
                 });
             });
-        });
+        }
     </script>
 </body>
 </html>
