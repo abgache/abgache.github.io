@@ -85,13 +85,14 @@
                 ctx.fillStyle = "black";
                 ctx.textAlign = "left";
 
-                ctx.fillText(`Nom : ${nom}`, 35, 400); // Coordonnées ajustées pour chaque texte
-                ctx.fillText(`Prénom : ${prenom}`, 35, 430);
-                ctx.fillText(`Né(e) le : ${dateNaissance}`, 35, 460);
-                ctx.fillText(`Taille : ${taille}m`, 35, 490);
-                ctx.fillText(`Sexe : ${sexe}`, 35, 520);
+                // Afficher les données aux nouvelles coordonnées
+                ctx.fillText(nom, 320, 133);               // Nom à (320, 133)
+                ctx.fillText(prenom, 355, 180);            // Prénom à (355, 180)
+                ctx.fillText(sexe, 321, 230);              // Sexe à (321, 230)
+                ctx.fillText(dateNaissance, 540, 228);     // Date de naissance à (540, 228)
             };
         };
+
 
             reader.readAsDataURL(skinFile);
         });
