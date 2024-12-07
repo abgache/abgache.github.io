@@ -73,26 +73,25 @@
                 skinImage.src = e.target.result;
 
                 skinImage.onload = function () {
-                    // Charger le template
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    ctx.drawImage(templateImage, 0, 0, canvas.width, canvas.height);
+                // Charger le template
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(templateImage, 0, 0, canvas.width, canvas.height);
 
-                    // Dessiner l'image de skin
-                    ctx.drawImage(skinImage, 50, 200, 150, 150);
+                // Dessiner l'image de skin (photo d'identité)
+                ctx.drawImage(skinImage, 80, 150, 120, 150); // Ajustez ici (x, y, largeur, hauteur)
 
-                    // Ajouter les textes
-                    ctx.font = "20px Arial";
-                    ctx.fillStyle = "black";
-                    ctx.fillText(`Nom : ${nom}`, 250, 100);
-                    ctx.fillText(`Prénom : ${prenom}`, 250, 150);
-                    ctx.fillText(`Né(e) le : ${dateNaissance}`, 250, 200);
-                    ctx.fillText(`Taille : ${taille}m`, 250, 250);
-                    ctx.fillText(`Sexe : ${sexe}`, 250, 300);
+                // Ajouter les textes
+                ctx.font = "16px Arial";
+                ctx.fillStyle = "black";
+                ctx.textAlign = "left";
 
-                    // Afficher le bouton d'envoi
-                    document.getElementById('sendButton').style.display = 'inline';
-                };
+                ctx.fillText(`Nom : ${nom}`, 250, 140); // x = 250, y = 140
+                ctx.fillText(`Prénom : ${prenom}`, 250, 180); // x = 250, y = 180
+                ctx.fillText(`Né(e) le : ${dateNaissance}`, 250, 220); // x = 250, y = 220
+                ctx.fillText(`Taille : ${taille}m`, 250, 260); // x = 250, y = 260
+                ctx.fillText(`Sexe : ${sexe}`, 250, 300); // x = 250, y = 300
             };
+        };
 
             reader.readAsDataURL(skinFile);
         });
