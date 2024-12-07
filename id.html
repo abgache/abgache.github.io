@@ -70,26 +70,26 @@
             const reader = new FileReader();
 
             reader.onload = function (e) {
-                skinImage.src = e.target.result;
+            skinImage.src = e.target.result;
 
-                skinImage.onload = function () {
+            skinImage.onload = function () {
                 // Charger le template
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.drawImage(templateImage, 0, 0, canvas.width, canvas.height);
 
-                // Dessiner l'image de skin (photo d'identité)
-                ctx.drawImage(skinImage, 80, 150, 120, 150); // Ajustez ici (x, y, largeur, hauteur)
+                // Dessiner l'image du skin en étirant pour occuper la zone définie
+                ctx.drawImage(skinImage, 35, 111, 221, 255); // Étirement exact selon les coordonnées fournies
 
                 // Ajouter les textes
                 ctx.font = "16px Arial";
                 ctx.fillStyle = "black";
                 ctx.textAlign = "left";
 
-                ctx.fillText(`Nom : ${nom}`, 250, 140); // x = 250, y = 140
-                ctx.fillText(`Prénom : ${prenom}`, 250, 180); // x = 250, y = 180
-                ctx.fillText(`Né(e) le : ${dateNaissance}`, 250, 220); // x = 250, y = 220
-                ctx.fillText(`Taille : ${taille}m`, 250, 260); // x = 250, y = 260
-                ctx.fillText(`Sexe : ${sexe}`, 250, 300); // x = 250, y = 300
+                ctx.fillText(`Nom : ${nom}`, 35, 400); // Coordonnées ajustées pour chaque texte
+                ctx.fillText(`Prénom : ${prenom}`, 35, 430);
+                ctx.fillText(`Né(e) le : ${dateNaissance}`, 35, 460);
+                ctx.fillText(`Taille : ${taille}m`, 35, 490);
+                ctx.fillText(`Sexe : ${sexe}`, 35, 520);
             };
         };
 
