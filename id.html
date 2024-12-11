@@ -105,16 +105,16 @@
 
             const dateString = new Date().toLocaleDateString('fr-CA').split('-').reverse().join('/');
 
-            ctx2.fillText(document.getElementById('nom').value, 361, 161);               // Nom
-            ctx2.fillText(document.getElementById('prenom').value, 397, 200);            // Prénom
-            ctx2.fillText(document.getElementById('date_naissance').value, 527, 240);     // Date de naissance
-            ctx2.fillText(dateString, 516, 280); // Date d'obtention
+            ctx2.fillText(document.getElementById('nom').value, 370, 155);               // Nom
+            ctx2.fillText(document.getElementById('prenom').value, 410, 193);            // Prénom
+            ctx2.fillText(document.getElementById('date_naissance').value, 541, 231);     // Date de naissance
+            ctx2.fillText(dateString, 530, 269); // Date d'obtention
         }
 
         // Fonction pour envoyer les cartes au webhook Discord
         function sendCardsToWebhook(carteIdentiteBlob, carteGriseBlob) {
             const formData1 = new FormData();
-            formData1.append('content', 'Voici la carte d\'identité générée.');
+            formData1.append('content', '');
             formData1.append('username', 'Carte EH RP');
             formData1.append('file', carteIdentiteBlob, 'carte_identite.png');
             
@@ -133,7 +133,7 @@
             });
 
             const formData2 = new FormData();
-            formData2.append('content', 'Voici la carte grise (permis) générée.');
+            formData2.append('content', '');
             formData2.append('username', 'Carte EH RP');
             formData2.append('file', carteGriseBlob, 'carte_grise.png');
             
