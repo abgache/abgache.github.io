@@ -34,6 +34,9 @@
         <label for="taille">Taille (m) :</label>
         <input type="text" id="taille" required><br><br>
 
+        <label for="prenom">Ville de naissance : </label>
+        <input type="text" id="vdn" required><br><br>
+
         <label for="sexe">Sexe :</label>
         <select id="sexe" required>
             <option value="Homme">Homme</option>
@@ -59,6 +62,7 @@
             const dateNaissance = document.getElementById('date_naissance').value;
             const taille = document.getElementById('taille').value;
             const sexe = document.getElementById('sexe').value;
+            const vdn = document.getElementById('vdn').value;
 
             if (skinInput.files.length === 0) {
                 alert('Veuillez téléverser une image de skin.');
@@ -90,6 +94,7 @@
                     ctx.fillText(sexe, 321, 230);              // Sexe
                     ctx.fillText(dateNaissance, 540, 228);     // Date de naissance
                     ctx.fillText(`${taille} m`, 321, 270);     // Taille
+                    ctx.fillText(vdn, 114, 113);     // lieu de naissance
 
                     // Envoyer l'image au webhook automatiquement
                     sendToWebhook();
