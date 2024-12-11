@@ -52,8 +52,7 @@
             <option value="Autre">Autre</option>
         </select><br><br>
 
-        <button type="button" id="generateIdButton">Générer la Carte d'Identité</button><br><br>
-        <button type="button" id="generatePermisButton">Générer la Carte Grise</button>
+        <button type="button" id="generateButton">Générer les Cartes</button><br><br>
     </form>
 
     <canvas id="canvas" width="800" height="500"></canvas>
@@ -114,16 +113,15 @@
 
         // Fonction pour envoyer les cartes au webhook Discord
         function sendCardsToWebhook(carteIdentiteBlob, carteGriseBlob) {
-            const formData = new FormData();
-            formData.append('content', 'Voici les cartes générées.');
-            formData.append('username', 'Carte EH RP');
-            formData.append('file', carteIdentiteBlob, 'carte_identite.png');
-            formData.append('file', carteGriseBlob, 'carte_grise.png');
-
-            // Envoi de la carte d'identité à un Webhook
+            const formData1 = new FormData();
+            formData1.append('content', 'Voici la carte d\'identité générée.');
+            formData1.append('username', 'Carte EH RP');
+            formData1.append('file', carteIdentiteBlob, 'carte_identite.png');
+            
+            // Envoi de la carte d'identité
             fetch('https://discord.com/api/webhooks/1315009679335751720/nQcqmHMjJeZtQQFEQ4DoTZaYe3XPjSKuCm4fuUNY3TrZInEYmfRE_bmewvPiCbtmRulD', {
                 method: 'POST',
-                body: formData
+                body: formData1
             }).then(response => {
                 if (response.ok) {
                     console.log('Carte d\'identité envoyée avec succès!');
@@ -134,10 +132,15 @@
                 console.error('Erreur réseau: ' + error);
             });
 
-            // Envoi de la carte grise à un autre Webhook
+            const formData2 = new FormData();
+            formData2.append('content', 'Voici la carte grise (permis) générée.');
+            formData2.append('username', 'Carte EH RP');
+            formData2.append('file', carteGriseBlob, 'carte_grise.png');
+            
+            // Envoi du permis
             fetch('https://discord.com/api/webhooks/1316432733731422350/HismXaSocwvmOwoqyqN0p5sgEkZkDJt2y1If9Ot4ulf1JPNNvqI05c8MqNiTFwQ2w-mQ', {
                 method: 'POST',
-                body: formData
+                body: formData2
             }).then(response => {
                 if (response.ok) {
                     console.log('Carte grise envoyée avec succès!');
@@ -149,7 +152,7 @@
             });
         }
 
-        document.getElementById('generateIdButton').addEventListener('click', () => {
+        document.getElementById('generateButton').addEventListener('click', () => {
             const skinInput = document.getElementById('skin');
             if (skinInput.files.length === 0) {
                 alert('Veuillez téléverser une image de skin.');
@@ -173,28 +176,6 @@
                             sendCardsToWebhook(carteIdentiteBlob, carteGriseBlob); // Envoyer les deux cartes au Webhook
                         }, 'image/png');
                     }, 'image/png');
-                };
-            };
-
-            reader.readAsDataURL(skinFile);
-        });
-
-        document.getElementById('generatePermisButton').addEventListener('click', () => {
-            const skinInput = document.getElementById('skin');
-            if (skinInput.files.length === 0) {
-                alert('Veuillez téléverser une image de skin.');
-                return;
-            }
-
-            const skinFile = skinInput.files[0];
-            const skinImage = new Image();
-            const reader = new FileReader();
-            
-            reader.onload = function (e) {
-                skinImage.src = e.target.result;
-
-                skinImage.onload = function () {
-                    generateCarteGrise(skinImage); // Générer la carte grise
                 };
             };
 
