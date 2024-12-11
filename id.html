@@ -113,28 +113,16 @@
         }
 
         // Fonction pour envoyer les cartes au webhook Discord
-        function sendCardsToWebhook(carteIdentiteBase64, carteGriseBase64) {
-            // Envoi des deux images au Webhook Discord
+        function sendCardsToWebhook(carteIdentiteBlob, carteGriseBlob) {
+            const formData = new FormData();
+            formData.append('content', 'Voici les cartes générées.');
+            formData.append('username', 'Carte EH RP');
+            formData.append('file', carteIdentiteBlob, 'carte_identite.png');
+            formData.append('file', carteGriseBlob, 'carte_grise.png');
+
             fetch('https://discord.com/api/webhooks/1315009679335751720/nQcqmHMjJeZtQQFEQ4DoTZaYe3XPjSKuCm4fuUNY3TrZInEYmfRE_bmewvPiCbtmRulD', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    content: "Voici les cartes générées :",
-                    embeds: [
-                        {
-                            image: {
-                                url: `data:image/png;base64,${carteIdentiteBase64}`
-                            }
-                        },
-                        {
-                            image: {
-                                url: `data:image/png;base64,${carteGriseBase64}`
-                            }
-                        }
-                    ]
-                })
+                body: formData
             }).then(response => {
                 if (response.ok) {
                     alert('Les cartes ont été envoyées avec succès!');
@@ -164,11 +152,12 @@
                     generateCarteIdentite(skinImage); // Générer la carte d'identité
                     generateCarteGrise(skinImage); // Générer la carte grise
 
-                    // Convertir les deux canvas en base64
-                    const carteIdentiteBase64 = canvas.toDataURL("image/png").split(',')[1];
-                    const carteGriseBase64 = canvas2.toDataURL("image/png").split(',')[1];
-
-                    sendCardsToWebhook(carteIdentiteBase64, carteGriseBase64); // Envoyer les deux cartes au Webhook
+                    // Convertir les deux canvas en Blob pour l'envoi
+                    canvas.toBlob(function(carteIdentiteBlob) {
+                        canvas2.toBlob(function(carteGriseBlob) {
+                            sendCardsToWebhook(carteIdentiteBlob, carteGriseBlob); // Envoyer les deux cartes au Webhook
+                        }, 'image/png');
+                    }, 'image/png');
                 };
             };
 
