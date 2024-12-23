@@ -1,111 +1,69 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <title>PSP official site</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSP Official Site</title>
     <script type="text/javascript">
-        atOptions = {
+        var atOptions = {
             'key' : '023f767c933535ff419d919a92c062af',
             'format' : 'iframe',
             'height' : 90,
             'width' : 728,
             'params' : {}
         };
-    </script>
-    <script type="text/javascript" src="//www.highperformanceformat.com/023f767c933535ff419d919a92c062af/invoke.js"></script>
-    <style>
-        body {
-            background-image: linear-gradient(to right, #ffffff, #af574c);
+        
+        window.onload = function() {
+            // Création et ajout du script de la publicité
+            var script = document.createElement('script');
+            script.src = '//www.highperformanceformat.com/023f767c933535ff419d919a92c062af/invoke.js';
+            script.type = 'text/javascript';
+            
+            // Fonction exécutée lorsque le script est chargé
+            script.onload = function() {
+                console.log('Publicité chargée avec succès');
+                checkAdIframe();
+            };
+            
+            // Fonction exécutée en cas d’erreur de chargement
+            script.onerror = function() {
+                console.error('Erreur de chargement du script de publicité');
+            };
+            
+            document.body.appendChild(script);
+        };
+
+        // Fonction pour vérifier si l'iframe de la publicité est ajoutée
+        function checkAdIframe() {
+            var iframe = document.querySelector('iframe');
+            if (iframe) {
+                console.log('Iframe de publicité affichée');
+            } else {
+                console.log('L\'iframe n\'a pas été ajoutée');
+            }
         }
-        .button {
-            background-color: #af574c;
-            border: none;
-            border-radius: 12px;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .button:hover {
-            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-        }
-        .button2 {
-            float: right;
-            background-color: #af6b4c;
-            border-radius: 15px;
-            padding: 15px 22px;
-            color: #eec4b1;
-            position: fixed;
-            top: 20px;
-            right: 30px;
-            cursor: pointer;
-        }
-        .buttona {
-            background-color: black;
-            color: white;
-            border: 2px solid transparent;
-            border-radius: 12px;
-            padding: 15px 32px;
-            font-size: 16px;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            transition: color 0.3s ease;
-        }
-        .buttona:hover {
-            color: black;
-        }
-        .buttona::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, red, yellow, green, cyan, blue, magenta, red);
-            background-size: 400%;
-            z-index: -1;
-            transition: opacity 0.3s ease;
-            animation: animate-border 3s linear infinite;
-            border-radius: inherit;
-        }
-        .buttona:hover::before {
-            opacity: 1;
-            clip-path: inset(0% round 12px);
-        }
-        @keyframes animate-border {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-    </style>
-    <script src="https://unpkg.com/cursor-effects@latest/dist/browser.js"></script>
-    <script type="module">
-        import { fairyDustCursor } from "https://unpkg.com/cursor-effects@latest/dist/esm.js";
-        new fairyDustCursor();
     </script>
 </head>
 <body>
-    <img src="PSP.png" width="50" height="100" alt="PSP Logo">
-    <button id="pluspsp" class="button2" onclick="window.location.href='/more.html'">En savoir plus sur la PSP</button>
-    <h1>abgache's 2nd official website</h1>
-    <button class="button" onclick="window.location.href='/Montpelier-emploie.html'">Interface ville de Montpelier</button>
-    <button class="button" onclick="window.location.href='/car-creator.html'">Carte de vente de voitures</button>
-    <button class="button" onclick="window.location.href='/id.html'">Créateur de carte d'identité</button>
-    <button class="buttona">Install my games</button>
+    <h1>Bienvenue sur le site officiel de PSP</h1>
+    
+    <!-- Emplacement de la publicité -->
+    <div id="advertisement">
+        <p>La publicité devrait être affichée ici.</p>
+    </div>
+    
+    <!-- Autres boutons de la page -->
+    <button onclick="window.location.href='/more.html'">En savoir plus sur la PSP</button>
+    <button onclick="window.location.href='/Montpelier-emploie.html'">Interface ville de Montpelier</button>
+    <button onclick="window.location.href='/car-creator.html'">Carte de vente de voitures</button>
+    <button onclick="window.location.href='/id.html'">Créateur de carte d'identité</button>
+    
+    <!-- Lien de téléchargement et autres actions -->
+    <button class="buttona" onclick="window.open('https://abgache-jeu.my.canva.site', '_blank')">Install my games</button>
 
-    <script>
-        function boutonPresse() {
-            window.open('https://abgache.itch.io', '_blank');
-        }
-
-        function telechargerFichier() {
-            var lienTelechargement = document.getElementById('lien-telechargement');
-            lienTelechargement.click();
-        }
+    <!-- Script de vérification -->
+    <script type="text/javascript">
+        // Vous pouvez ajouter ici des vérifications supplémentaires ou des logiques conditionnelles.
     </script>
 </body>
 </html>
