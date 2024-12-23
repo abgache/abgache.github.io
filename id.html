@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carte d'identité EH RP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #canvas, #canvas2 {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+        }
+        .small-text {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            font-size: 10px;
+            margin: 10px;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Créer votre carte d'identité EH RP</h1>
+    <p>made by abgache, V2</p>
+    <form id="idForm">
+        <label for="skin">Image du skin :</label>
+        <input type="file" id="skin" accept="image/*" required><br><br>
+
+        <label for="nom">Nom :</label>
+        <input type="text" id="nom" required><br><br>
+
+        <label for="prenom">Prénom :</label>
+        <input type="text" id="prenom" required><br><br>
+
+        <label for="date_naissance">Date de naissance :</label>
+        <input type="date" id="date_naissance" required><br><br>
+
+        <label for="taille">Taille (m) :</label>
+        <input type="text" id="taille" required><br><br>
+
+        <label for="vdn">Ville de naissance :</label>
+        <input type="text" id="vdn" required><br><br>
+
+        <label for="sexe">Sexe :</label>
+        <select id="sexe" required>
+            <option value="Homme">Homme</option>
+            <option value="Femme">Femme</option>
+            <option value="Autre">Autre</option>
+        </select><br><br>
+
+        <button type="button" id="generateButton">Générer les Cartes</button><br><br>
+    </form>
+
+    <canvas id="canvas" width="800" height="500"></canvas>
+    <canvas id="canvas2" width="800" height="500"></canvas>
+    <p class="small-text">Build 1.3.0-6</p>
+    
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const canvas2 = document.getElementById('canvas2');
+        const ctx2 = canvas2.getContext('2d');
+        const templateImage = new Image();
+        templateImage.src = "template.jpg"; // Remplacez par le chemin de votre template
+        const templateImage2 = new Image();
+        templateImage2.src = "permis.png"; // Remplacez par le chemin de votre template permis
+
+        // Fonction pour générer la carte d'identité
+        function generateCarteIdentite(skinImage) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(templateImage, 0, 0, canvas.width, canvas.height);
+
+            // Dessiner l'image du skin
+            ctx.drawImage(skinImage, 35, 111, 221, 255);
+
+            // Ajouter les textes
+            ctx.font = "16px Arial";
+            ctx.fillStyle = "black";
+            ctx.textAlign = "left";
+
+            ctx.fillText(document.getElementById('nom').value, 320, 133);               // Nom
+            ctx.fillText(document.getElementById('prenom').value, 355, 180);            // Prénom
+            ctx.fillText(document.getElementById('sexe').value, 321, 230);              // Sexe
+            ctx.fillText(document.getElementById('date_naissance').value, 540, 228);     // Date de naissance
+            ctx.fillText(`${document.getElementById('taille').value} m`, 321, 270);     // Taille
+            ctx.fillText(document.getElementById('vdn').value, 293, 250);               // Lieu de naissance
+        }
+
+        // Fonction pour générer la carte grise (permis)
+        function generateCarteGrise(skinImage) {
+            ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+            ctx2.drawImage(templateImage2, 0, 0, canvas2.width, canvas2.height);
+
+            // Dessiner l'image du skin
+            ctx2.drawImage(skinImage, 33, 141, 213, 214);
+
+            // Ajouter les textes
+            ctx2.font = "16px Arial";
+            ctx2.fillStyle = "black";
+            ctx2.textAlign = "left";
+
+            const dateString = new Date().toLocaleDateString('fr-CA').split('-').reverse().join('/');
+
+            ctx2.fillText(document.getElementById('nom').value, 370, 155);               // Nom
+            ctx2.fillText(document.getElementById('prenom').value, 410, 193);            // Prénom
+            ctx2.fillText(document.getElementById('date_naissance').value, 541, 231);     // Date de naissance
+            ctx2.fillText(dateString, 530, 269); // Date d'obtention
+        }
+
+        // Fonction pour envoyer les cartes au webhook Discord
+        function sendCardsToWebhook(carteIdentiteBlob, carteGriseBlob) {
+            const formData1 = new FormData();
+            formData1.append('content', '');
+            formData1.append('username', 'Carte EH RP');
+            formData1.append('file', carteIdentiteBlob, 'carte_identite.png');
+            
+            // Envoi de la carte d'identité
+            fetch('https://discord.com/api/webhooks/1315009679335751720/nQcqmHMjJeZtQQFEQ4DoTZaYe3XPjSKuCm4fuUNY3TrZInEYmfRE_bmewvPiCbtmRulD', {
+                method: 'POST',
+                body: formData1
+            }).then(response => {
+                if (response.ok) {
+                    console.log('Carte d\'identité envoyée avec succès!');
+                } else {
+                    console.error('Erreur lors de l\'envoi de la carte d\'identité');
+                }
+            }).catch(error => {
+                console.error('Erreur réseau: ' + error);
+            });
+
+            const formData2 = new FormData();
+            formData2.append('content', '');
+            formData2.append('username', 'Carte EH RP');
+            formData2.append('file', carteGriseBlob, 'carte_grise.png');
+            
+            // Envoi du permis
+            fetch('https://discord.com/api/webhooks/1316432733731422350/HismXaSocwvmOwoqyqN0p5sgEkZkDJt2y1If9Ot4ulf1JPNNvqI05c8MqNiTFwQ2w-mQ', {
+                method: 'POST',
+                body: formData2
+            }).then(response => {
+                if (response.ok) {
+                    console.log('Carte grise envoyée avec succès!');
+                } else {
+                    console.error('Erreur lors de l\'envoi de la carte grise');
+                }
+            }).catch(error => {
+                console.error('Erreur réseau: ' + error);
+            });
+        }
+
+        document.getElementById('generateButton').addEventListener('click', () => {
+            const skinInput = document.getElementById('skin');
+            if (skinInput.files.length === 0) {
+                alert('Veuillez téléverser une image de skin.');
+                return;
+            }
+
+            const skinFile = skinInput.files[0];
+            const skinImage = new Image();
+            const reader = new FileReader();
+            
+            reader.onload = function (e) {
+                skinImage.src = e.target.result;
+
+                skinImage.onload = function () {
+                    generateCarteIdentite(skinImage); // Générer la carte d'identité
+                    generateCarteGrise(skinImage); // Générer la carte grise
+
+                    // Convertir les deux canvas en Blob pour l'envoi
+                    canvas.toBlob(function(carteIdentiteBlob) {
+                        canvas2.toBlob(function(carteGriseBlob) {
+                            sendCardsToWebhook(carteIdentiteBlob, carteGriseBlob); // Envoyer les deux cartes au Webhook
+                        }, 'image/png');
+                    }, 'image/png');
+                };
+            };
+
+            reader.readAsDataURL(skinFile);
+        });
+    </script>
+</body>
+</html>

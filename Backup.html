@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backup ID Bot</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        #progress-container {
+            display: none;
+            margin-top: 20px;
+            width: 80%;
+            max-width: 400px;
+            background-color: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        #progress-bar {
+            width: 0;
+            height: 20px;
+            background-color: #4caf50;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+        #time-remaining {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Backup ID Bot</h1>
+    <p>La backup a été faite par Abgache le 14/12/2024 pour le serveur de Sète.</p>
+    <button id="start-button">Remettre la Backup</button>
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+    <div id="time-remaining"></div>
+
+    <script>
+        const startButton = document.getElementById('start-button');
+        const progressBar = document.getElementById('progress-bar');
+        const progressContainer = document.getElementById('progress-container');
+        const timeRemaining = document.getElementById('time-remaining');
+
+        startButton.addEventListener('click', () => {
+            startButton.disabled = true;
+            progressContainer.style.display = 'block';
+
+            let progress = 0;
+            const duration = 60 * 60 * 1000; // 1 hour in milliseconds
+            const interval = 100; // Update every 100ms
+            const step = (interval / duration) * 100; // Percentage step
+
+            const startTime = Date.now();
+            const endTime = startTime + duration;
+
+            const intervalId = setInterval(() => {
+                progress += step;
+                progressBar.style.width = `${progress}%`;
+
+                const currentTime = Date.now();
+                const timeLeft = Math.max(0, endTime - currentTime);
+                const minutes = Math.floor(timeLeft / 60000);
+                const seconds = Math.floor((timeLeft % 60000) / 1000);
+                timeRemaining.textContent = `Temps restant : ${minutes}m ${seconds}s`;
+
+                if (progress >= 100) {
+                    clearInterval(intervalId);
+                    alert('Backup terminé!');
+                }
+            }, interval);
+        });
+    </script>
+</body>
+</html>
