@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sète RP - Serveur Roblox</title>
+    <link rel="icon" type="image/png" href="image.png">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-overlay"></div>
+    <div class="floating-robux">
+        <i class="fas fa-coins robux-icon"></i>
+        <span> Gagnez de nombreux Robux !</span>
+    </div>
+    
+    <header>
+        <nav>
+            <div class="logo" data-aos="fade-right">
+                <img src="image.png" alt="Logo Sète RP" class="logo-img">
+                Sète RP
+            </div>
+            <ul data-aos="fade-left">
+                <li><a href="#accueil"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="#ville"><i class="fas fa-city"></i> La Ville</a></li>
+                <li><a href="#robux"><i class="fas fa-coins"></i> Robux</a></li>
+                <li><a href="#rejoindre"><i class="fas fa-gamepad"></i> Jouer</a></li>
+                <li><a href="#discord" class="nav-discord"><i class="fab fa-discord"></i> Discord</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="accueil" class="hero">
+            <div class="hero-content" data-aos="zoom-in">
+                <h1>Bienvenue à Sète RP</h1>
+                <p>Explorez, Jouez, Gagnez des Robux</p>
+                <div class="hero-buttons">
+                    <a href="#rejoindre" class="cta-button glow"><i class="fas fa-gamepad"></i> Jouer Maintenant</a>
+                    <a href="#robux" class="cta-button secondary"><i class="fas fa-coins"></i> Gagner des Robux</a>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </section>
+
+        <section id="ville" class="section">
+            <h2 data-aos="fade-up">Découvrez Sète RP</h2>
+            <div class="content">
+                <div class="city-grid">
+                    <div class="city-card" data-aos="fade-right">
+                        <img src="https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=800" alt="Port de Sète">
+                        <div class="city-card-content">
+                            <h3>Le Port Commercial</h3>
+                            <p>Devenez docker, pêcheur ou négociant maritime dans le plus grand port RP de Méditerranée. Gérez vos cargaisons, négociez avec les marchands et vivez l'expérience d'une ville portuaire authentique.</p>
+                        </div>
+                    </div>
+                    <div class="city-card" data-aos="fade-up">
+                        <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=800" alt="Mont Saint-Clair">
+                        <div class="city-card-content">
+                            <h3>Le Quartier Huppé</h3>
+                            <p>Installez-vous dans les somptueuses villas du Mont Saint-Clair. Devenez un notable de la ville, organisez des réceptions mondaines et profitez d'une vue imprenable sur toute la baie.</p>
+                        </div>
+                    </div>
+                    <div class="city-card" data-aos="fade-left">
+                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800" alt="Plages">
+                        <div class="city-card-content">
+                            <h3>La Zone Balnéaire</h3>
+                            <p>Gérez votre propre commerce en bord de mer, devenez maître-nageur, ou lancez votre école de voile. Créez votre histoire dans un cadre paradisiaque entre mer et lagune.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="robux" class="section robux-section">
+            <h2 data-aos="fade-up">Gagnez des Robux</h2>
+            <div class="content">
+                <div class="robux-intro" data-aos="fade-up">
+                    <i class="fas fa-gift gift-icon"></i>
+                    <h3>Système de Récompenses</h3>
+                    <p>Plus vous jouez, plus vous gagnez ! Participez aux événements et accomplissez des missions pour gagner des Robux.</p>
+                </div>
+                <div class="robux-cards">
+                    <div class="robux-card" data-aos="flip-left">
+                        <div class="robux-amount">
+                            <i class="fas fa-coins"></i>
+                            <span>Starter</span>
+                        </div>
+                        <h3>Pack Découverte</h3>
+                        <ul>
+                            <li>Missions quotidiennes</li>
+                            <li>Événements publics</li>
+                            <li>Bonus de connexion</li>
+                        </ul>
+                        <a href="#rejoindre" class="robux-button">Commencer</a>
+                    </div>
+                    <div class="robux-card premium" data-aos="flip-left" data-aos-delay="100">
+                        <div class="card-badge">POPULAIRE</div>
+                        <div class="robux-amount">
+                            <i class="fas fa-coins"></i>
+                            <span>Intermédiaire</span>
+                        </div>
+                        <h3>Pack Elite</h3>
+                        <ul>
+                            <li>Missions spéciales</li>
+                            <li>Événements VIP</li>
+                            <li>Bonus hebdomadaires</li>
+                            <li>Accès prioritaire</li>
+                        </ul>
+                        <a href="#rejoindre" class="robux-button premium">Devenir Elite</a>
+                    </div>
+                    <div class="robux-card" data-aos="flip-left" data-aos-delay="200">
+                        <div class="robux-amount">
+                            <i class="fas fa-coins"></i>
+                            <span>Maximum</span>
+                        </div>
+                        <h3>Pack Légende</h3>
+                        <ul>
+                            <li>Missions légendaires</li>
+                            <li>Événements exclusifs</li>
+                            <li>Bonus quotidiens</li>
+                            <li>Avantages uniques</li>
+                        </ul>
+                        <a href="#rejoindre" class="robux-button">Devenir Légende</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="rejoindre" class="section join-section">
+            <h2 data-aos="fade-up">Rejoindre l'Aventure</h2>
+            <div class="content">
+                <div class="join-grid">
+                    <div class="join-card" data-aos="fade-right">
+                        <img src="https://images.unsplash.com/photo-1614680376593-902f74cf0d41?w=800" alt="Discord Community">
+                        <div class="join-card-content">
+                            <h3>Rejoindre le Jeu</h3>
+                            <p>Cliquez sur le bouton ci-dessous pour rejoindre notre serveur Roblox</p>
+                            <a href="https://www.roblox.com/games/votre-id" class="join-button" target="_blank">
+                                <i class="fas fa-gamepad"></i> Lancer le Jeu
+                            </a>
+                        </div>
+                    </div>
+                    <div class="join-card" data-aos="fade-left" id="discord">
+                        <img src="https://images.unsplash.com/photo-1614680376593-902f74cf0d41?w=800" alt="Discord Community">
+                        <div class="join-card-content">
+                            <h3>Rejoindre Discord</h3>
+                            <p>Connectez-vous à notre communauté pour participer aux événements</p>
+                            <a href="https://discord.gg/votre-discord" class="join-button discord" target="_blank">
+                                <i class="fab fa-discord"></i> Rejoindre Discord
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Liens Utiles</h3>
+                <ul>
+                    <li><a href="reglement.html">Règlement</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="mailto:support@seterp.com">Support</a></li>
+                    <li><a href="https://discord.gg/votre-discord" target="_blank">Recrutement</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Communauté</h3>
+                <div class="social-links">
+                    <a href="https://discord.gg/votre-discord" target="_blank" class="social-link discord"><i class="fab fa-discord"></i></a>
+                    <a href="https://twitter.com/votre-twitter" target="_blank" class="social-link twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://youtube.com/votre-youtube" target="_blank" class="social-link youtube"><i class="fab fa-youtube"></i></a>
+                    <a href="https://tiktok.com/@votre-tiktok" target="_blank" class="social-link tiktok"><i class="fab fa-tiktok"></i></a>
+                </div>
+                <div class="discord-members">
+                    <i class="fab fa-discord"></i>
+                    <span>Une grande communauté</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Sète RP - Tous droits réservés</p>
+            <div class="footer-links">
+                <a href="mentions-legales.html">Mentions légales</a>
+                <a href="confidentialite.html">Confidentialité</a>
+                <a href="mailto:contact@seterp.com">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>
+</body>
+</html>
