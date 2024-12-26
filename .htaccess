@@ -1,0 +1,5 @@
+''' c
+RewriteEngine On
+RewriteRule ^sete$ sete.html [L]
+RewriteRule ^plus$ more.html [L]
+''''
