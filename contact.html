@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Envoyer un message</title>
+</head>
+<body>
+    <h1>Envoyer un message au Webhook</h1>
+    
+    <form id="messageForm">
+        <label for="name">Ton Nom:</label>
+        <input type="text" id="name" name="name" required><br><br>
+        
+        <label for="message">Ton Message:</label><br>
+        <textarea id="message" name="message" rows="4" cols="50" required></textarea><br><br>
+        
+        <button type="submit">Envoyer</button>
+    </form>
+
+    <script>
+        document.getElementById('messageForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const message = document.getElementById('message').value;
+            
+            const payload = {
+                content: `Nom: ${name}\nMessage: ${message}`
+            };
+            
+            fetch('https://discord.com/api/webhooks/1322626167827857489/DAW4V8ZhGCqnWawuQwezcG1srFZ5T2MfyDpOwJu8wbk5YM75Y9fU5recouWmrC2KbJiu', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Message envoyé avec succès !');
+                // Réinitialiser le formulaire après l'envoi
+                document.getElementById('messageForm').reset();
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                alert('Erreur lors de l\'envoi du message.');
+            });
+        });
+    </script>
+</body>
+</html>
