@@ -26,7 +26,8 @@
             const message = document.getElementById('message').value;
             
             const payload = {
-                content: `Nom: ${name}\nMessage: ${message}`
+                content: `${message}`,
+                username: `${name}`
             };
             
             fetch('https://discord.com/api/webhooks/1322626167827857489/DAW4V8ZhGCqnWawuQwezcG1srFZ5T2MfyDpOwJu8wbk5YM75Y9fU5recouWmrC2KbJiu', {
