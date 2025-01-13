@@ -51,7 +51,16 @@
     <style>
         body {
             background-image: linear-gradient(to right, #ffffff, #af574c);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
+
+        h1, h2, h3 {
+            text-align: center;
+            color: #ffffff;
+        }
+
         .button {
             background-color: #af574c;
             border: none;
@@ -63,37 +72,31 @@
             display: inline-block;
             font-size: 16px;
             cursor: pointer;
+            margin: 10px;
         }
-        .boutton3:hover {
-            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
-        }
+
         .button2 {
-            float:right;
             background-color: #af6b4c;
             border-radius: 15px;
             padding: 15px 22px;
             color: #eec4b1;
-            transform: translate(-50%, -50%);
             cursor: pointer;
             position: fixed;
             top: 20px;
             right: 0px;
         }
+
         .button2a {
-            float:right;
             background-color: #af6b4c;
             border-radius: 15px;
             padding: 15px 22px;
             color: #eec4b1;
-            transform: translate(-50%, -50%);
             cursor: pointer;
             position: fixed;
             top: 20px;
             right: 250px;
         }
-        .boutton4:hover {
-            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
-        }
+
         .buttona {
             background-color: black;
             color: white;
@@ -106,10 +109,13 @@
             overflow: hidden;
             z-index: 1;
             transition: color 0.3s ease;
+            margin: 10px;
         }
+
         .buttona:hover {
             color: black;
         }
+
         .buttona::before {
             content: '';
             position: absolute;
@@ -124,6 +130,7 @@
             animation: animate-border 3s linear infinite;
             border-radius: inherit;
         }
+
         .buttona:hover::before {
             opacity: 1;
             clip-path: inset(0% round 12px);
@@ -140,6 +147,40 @@
                 background-position: 0% 50%;
             }
         }
+
+        @media screen and (max-width: 768px) {
+            h1, h2, h3 {
+                font-size: 20px;
+            }
+            .button, .buttona, .button2, .button2a {
+                width: 100%;
+                margin: 10px 0;
+            }
+            .button2 {
+                position: static;
+                width: 100%;
+                text-align: center;
+            }
+            .button2a {
+                position: static;
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            h1 {
+                font-size: 24px;
+            }
+            .button {
+                font-size: 14px;
+                padding: 12px 24px;
+            }
+            .button2, .button2a {
+                font-size: 14px;
+                padding: 12px 18px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -150,12 +191,11 @@
     <h2>My contacts : </h2>
     <h3>My discord : abgache</h3>
     <h3>My e-mail adress : abgache@abgache.pro</h3>
-    <!--button class="button" onclick="window.location.href='/Montpelier-emploie.html'">Interface ville de Montpelier</button-->
-    <!--button class="button" onclick="window.location.href='/car-creator.html'">Carte de vente de voitures</button-->
     <button class="button" onclick="window.location.href='/dishack.html'">Install DisHack</button>
     <button class="button" onclick="window.location.href='/jailbreak.html'">JailBreak IOS 15</button>
     <button class="button" onclick="window.open('https://drive.google.com/file/d/1QJygOCFebxM5GVIk3-Z67YeoFITJ-xJL/view?usp=drive_link', '_blank')">Free G2A Exploit</button>
     <button class="button" onclick="window.open('https://thehiddenwiki.org/', '_blank')">Hidden WiKi (Dark web)</button>
     <button class="button" onclick="window.location.href='/USB-r-d.html'">How to create an USB Rubber Ducky</button>
     <button class="buttona" onclick="window.open('https://abgache.itch.io', '_blank')">My itch.io</button>
+</body>
 </html>
