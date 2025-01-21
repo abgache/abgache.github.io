@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloc-notes Auto-sauvegarde</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        textarea {
+            width: 100%;
+            height: 100%;
+            font-size: 16px;
+            border: none;
+            outline: none;
+            resize: none;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <textarea id="notes" placeholder="Écrivez vos notes ici..."></textarea>
+
+    <script>
+        // Charger les notes depuis les cookies
+        function loadNotes() {
+            const notes = document.cookie
+                .split('; ')
+                .find(row => row.startsWith('notes='))
+                ?.split('=')[1];
+            if (notes) {
+                document.getElementById('notes').value = decodeURIComponent(notes);
+            }
+        }
+
+        // Sauvegarder les notes dans les cookies à chaque changement
+        function saveNotes(event) {
+            const notes = event.target.value;
+            document.cookie = `notes=${encodeURIComponent(notes)}; path=/; max-age=31536000`; // 1 an
+        }
+
+        // Charger les notes au démarrage
+        window.onload = function () {
+            loadNotes();
+            document.getElementById('notes').addEventListener('input', saveNotes);
+        };
+    </script>
+</body>
+</html>
