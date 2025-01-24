@@ -26,8 +26,6 @@
             position: absolute;
             top: 10px;
             left: 10px;
-            display: flex;
-            gap: 10px;
         }
 
         button {
@@ -47,7 +45,6 @@
 <body>
     <div class="buttons">
         <button id="clear">Clear All</button>
-        <button id="fill">Fill</button>
     </div>
     <canvas id="drawingCanvas"></canvas>
 
@@ -55,13 +52,27 @@
         const canvas = document.getElementById("drawingCanvas");
         const ctx = canvas.getContext("2d");
         const clearButton = document.getElementById("clear");
-        const fillButton = document.getElementById("fill");
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        ctx.fillStyle = "black";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        function loadCanvas() {
+            const savedData = document.cookie.split('; ').find(row => row.startsWith('canvasData='));
+            if (savedData) {
+                const imageData = savedData.split('=')[1];
+                const img = new Image();
+                img.onload = () => ctx.drawImage(img, 0, 0);
+                img.src = imageData;
+            } else {
+                ctx.fillStyle = "black";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
+        }
+
+        function saveCanvas() {
+            const dataURL = canvas.toDataURL();
+            document.cookie = `canvasData=${dataURL}; path=/; max-age=31536000`;
+        }
 
         let drawing = false;
 
@@ -73,6 +84,7 @@
         function stopDrawing() {
             drawing = false;
             ctx.beginPath();
+            saveCanvas();
         }
 
         function draw(e) {
@@ -97,11 +109,7 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = "black";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-        });
-
-        fillButton.addEventListener("click", () => {
-            ctx.fillStyle = "white";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            document.cookie = `canvasData=; path=/; max-age=0`;
         });
 
         window.addEventListener("resize", () => {
@@ -110,6 +118,8 @@
             canvas.height = window.innerHeight;
             ctx.putImageData(imgData, 0, 0);
         });
+
+        loadCanvas();
     </script>
 </body>
 </html>
