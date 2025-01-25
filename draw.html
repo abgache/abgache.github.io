@@ -1,125 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dark Canvas</title>
+    <title>Canvas Drawing</title>
     <style>
         body {
             margin: 0;
-            background-color: black;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
             overflow: hidden;
-        }
-
-        canvas {
             background-color: black;
-            display: block;
-            cursor: crosshair;
         }
-
-        .buttons {
-            position: absolute;
+        canvas {
+            display: block;
+        }
+        button {
+            position: fixed;
             top: 10px;
             left: 10px;
-        }
-
-        button {
-            padding: 10px;
-            font-size: 16px;
+            z-index: 10;
+            background-color: white;
+            color: black;
             border: none;
+            padding: 10px;
             cursor: pointer;
-            border-radius: 5px;
-        }
-
-        button:hover {
-            background-color: #555;
-            color: white;
         }
     </style>
 </head>
 <body>
-    <div class="buttons">
-        <button id="clear">Clear All</button>
-    </div>
+    <button id="clear">Clear All</button>
     <canvas id="drawingCanvas"></canvas>
-
     <script>
-        const canvas = document.getElementById("drawingCanvas");
-        const ctx = canvas.getContext("2d");
-        const clearButton = document.getElementById("clear");
+        const canvas = document.getElementById('drawingCanvas');
+        const ctx = canvas.getContext('2d');
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        function loadCanvas() {
-            const savedData = document.cookie.split('; ').find(row => row.startsWith('canvasData='));
-            if (savedData) {
-                const imageData = savedData.split('=')[1];
-                const img = new Image();
-                img.onload = () => ctx.drawImage(img, 0, 0);
-                img.src = imageData;
-            } else {
-                ctx.fillStyle = "black";
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-            }
-        }
-
-        function saveCanvas() {
-            const dataURL = canvas.toDataURL();
-            document.cookie = `canvasData=${dataURL}; path=/; max-age=31536000`;
+        // Load saved drawing from cookie
+        const savedImage = document.cookie.split('; ').find(row => row.startsWith('drawing='));
+        if (savedImage) {
+            const imageData = savedImage.split('=')[1];
+            const img = new Image();
+            img.src = imageData;
+            img.onload = () => ctx.drawImage(img, 0, 0);
         }
 
         let drawing = false;
 
-        function startDrawing(e) {
-            drawing = true;
-            draw(e);
-        }
+        canvas.addEventListener('mousedown', () => drawing = true);
+        canvas.addEventListener('mouseup', () => drawing = false);
+        canvas.addEventListener('mousemove', draw);
 
-        function stopDrawing() {
-            drawing = false;
-            ctx.beginPath();
-            saveCanvas();
-        }
-
-        function draw(e) {
+        function draw(event) {
             if (!drawing) return;
+            ctx.strokeStyle = 'white';
+            ctx.lineWidth = 2;
+            ctx.lineCap = 'round';
 
-            ctx.lineWidth = 5;
-            ctx.lineCap = "round";
-            ctx.strokeStyle = "white";
-
-            ctx.lineTo(e.clientX, e.clientY);
-            ctx.stroke();
             ctx.beginPath();
-            ctx.moveTo(e.clientX, e.clientY);
+            ctx.moveTo(event.offsetX, event.offsetY);
+            ctx.lineTo(event.offsetX, event.offsetY);
+            ctx.stroke();
         }
 
-        canvas.addEventListener("mousedown", startDrawing);
-        canvas.addEventListener("mousemove", draw);
-        canvas.addEventListener("mouseup", stopDrawing);
-        canvas.addEventListener("mouseout", stopDrawing);
-
-        clearButton.addEventListener("click", () => {
+        document.getElementById('clear').addEventListener('click', () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "black";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            document.cookie = `canvasData=; path=/; max-age=0`;
+            saveDrawing();
         });
 
-        window.addEventListener("resize", () => {
-            const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        // Save drawing to cookie
+        function saveDrawing() {
+            const dataURL = canvas.toDataURL();
+            document.cookie = `drawing=${dataURL};path=/;max-age=31536000`;
+        }
+
+        // Save drawing on every mouseup
+        canvas.addEventListener('mouseup', saveDrawing);
+
+        window.addEventListener('resize', () => {
+            const tempCanvas = document.createElement('canvas');
+            const tempCtx = tempCanvas.getContext('2d');
+            tempCanvas.width = canvas.width;
+            tempCanvas.height = canvas.height;
+            tempCtx.drawImage(canvas, 0, 0);
+
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            ctx.putImageData(imgData, 0, 0);
-        });
 
-        loadCanvas();
+            ctx.drawImage(tempCanvas, 0, 0);
+        });
     </script>
 </body>
 </html>
