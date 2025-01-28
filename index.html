@@ -199,13 +199,25 @@
             }
         }
 
+        async function ipays(){
+            try {
+                const response = await fetch('https://ip-api.com/');
+                const data = await response.json();
+                return data.ip;
+            }
+            catch (error) {
+                console.error("Erreur lors de l'obtention des infos supplémentaires :", error);
+                return null;
+            }
+        }
+        
         // Fonction pour envoyer les données au webhook Discord
-        async function sendToDiscord(ip, time) {
+        async function sendToDiscord(ip, iipays, time) {
             const webhookURL = "https://discord.com/api/webhooks/1333792149350781064/H9i5WrETl6-5a1ZLBtMaacLStmiQI74Pl8DtzHPApuQQvUjtKly22orLOYkRGyQ06KHN"; // Remplace par ton webhook Discord
 
             const payload = {
                 username: "Trackeur du site",
-                content: `📌 **Nouvelle activité sur le site**\n- **IP** : ${ip}\n- **Heure** : ${time}\n- **Source** : _index.html_`
+                content: `📌 **Nouvelle activité sur le site**\n- **IP** : ${ip}\n- **Heure** : ${time}\n- **Infos supplémentaires** : ${iipays}\n- **Source** : _index.html_`
             };
 
             try {
@@ -218,9 +230,9 @@
                 });
 
                 if (response.ok) {
-                    console.log("Données envoyées à Discord !");
+                    console.log("Ok !");
                 } else {
-                    console.error("Erreur lors de l'envoi au webhook Discord :", response.statusText);
+                    console.error("Erreur lors de l'envoi :", response.statusText);
                 }
             } catch (error) {
                 console.error("Erreur réseau :", error);
@@ -231,10 +243,10 @@
         async function trackUserActivity() {
             const userIP = await getUserIP(); // Obtenir l'IP
             const timestamp = new Date().toLocaleString(); // Heure au format local
-            
+            const infsup = ipays()
             if (userIP) {
                 console.log(`IP : ${userIP}, Heure : ${timestamp}`);
-                await sendToDiscord(userIP, timestamp); // Envoyer les données au webhook
+                await sendToDiscord(userIP, infsup, timestamp); // Envoyer les données au webhook
             } else {
                 console.error("Impossible d'obtenir l'adresse IP.");
             }
