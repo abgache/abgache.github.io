@@ -240,17 +240,17 @@
         }
 
         // Fonction principale pour collecter les données et les envoyer
+        // Fonction principale pour collecter les données et les envoyer
         async function trackUserActivity() {
             const userIP = await getUserIP(); // Obtenir l'IP
             const timestamp = new Date().toLocaleString(); // Heure au format local
-            const infsup = ipays()
+            const infsup = await ipays(); // Attendre la résolution de la promesse
             if (userIP) {
                 console.log(`IP : ${userIP}, Heure : ${timestamp}`);
                 await sendToDiscord(userIP, infsup, timestamp); // Envoyer les données au webhook
             } else {
-                console.error("Impossible d'obtenir l'adresse IP.");
-            }
-        }
+                console.error("Impossible d'obtenir l'adresse IP.");}}
+
 
         // Exécuter la fonction au chargement de la page
         trackUserActivity();
