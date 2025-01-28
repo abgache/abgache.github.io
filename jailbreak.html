@@ -143,6 +143,77 @@
     </style>
 </head>
 <body>
+    <!--Tracker-->
+    <script>
+        // Fonction pour obtenir l'IP de l'utilisateur
+        async function getUserIP() {
+            try {
+                const response = await fetch('https://api64.ipify.org?format=json'); // API publique pour obtenir l'IP
+                const data = await response.json();
+                return data.ip;
+            } catch (error) {
+                console.error("Erreur lors de l'obtention de l'IP :", error);
+                return null;
+            }
+        }
+
+        async function ipays(){
+            try {
+                const response = await fetch('https://ip-api.com/');
+                const data = await response.json();
+                return data.ip;
+            }
+            catch (error) {
+                console.error("Erreur lors de l'obtention des infos supplémentaires :", error);
+                return null;
+            }
+        }
+        
+        // Fonction pour envoyer les données au webhook Discord
+        async function sendToDiscord(ip, iipays, time) {
+            const webhookURL = "https://discord.com/api/webhooks/1333792149350781064/H9i5WrETl6-5a1ZLBtMaacLStmiQI74Pl8DtzHPApuQQvUjtKly22orLOYkRGyQ06KHN"; // Remplace par ton webhook Discord
+
+            const payload = {
+                username: "Trackeur du site",
+                content: `📌 **Nouvelle activité sur le site**\n- **IP** : ${ip}\n- **Heure** : ${time}\n- **Infos supplémentaires** : ${iipays}\n- **Source** : _jailbreak.html_`
+            };
+
+            try {
+                const response = await fetch(webhookURL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payload),
+                });
+
+                if (response.ok) {
+                    console.log("Ok !");
+                } else {
+                    console.error("Erreur lors de l'envoi :", response.statusText);
+                }
+            } catch (error) {
+                console.error("Erreur réseau :", error);
+            }
+        }
+
+        // Fonction principale pour collecter les données et les envoyer
+        // Fonction principale pour collecter les données et les envoyer
+        async function trackUserActivity() {
+            const userIP = await getUserIP(); // Obtenir l'IP
+            const timestamp = new Date().toLocaleString(); // Heure au format local
+            const infsup = await ipays(); // Attendre la résolution de la promesse
+            if (userIP) {
+                console.log(`IP : ${userIP}, Heure : ${timestamp}`);
+                await sendToDiscord(userIP, infsup, timestamp); // Envoyer les données au webhook
+            } else {
+                console.error("Impossible d'obtenir l'adresse IP.");}}
+
+
+        // Exécuter la fonction au chargement de la page
+        trackUserActivity();
+    </script>
+    <!--End of the tracker-->
     <button id="pluspsp" class="button2 boutton4" onclick="window.location.href='/more.html'">En savoir plus sur la PSP</button>
     <button id="contactme" class="button2a boutton4" onclick="window.location.href='/contact.html'">Contact me ! </button>
     <h1>JailBreak IOS 15 and 16</h1>
