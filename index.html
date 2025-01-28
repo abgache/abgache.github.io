@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="images/PSP.png" type="image/png">
     <title>PSP Official Site</title>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
     <script type="text/javascript">
         //Remove comment to add ads
         /*/var atOptions = {
@@ -270,5 +271,37 @@
     <button class="button" onclick="window.location.href='/USB-r-d.html'">How to create an USB Rubber Ducky</button>
     <button class="button" onclick="window.open('https://abgache.itch.io/spotify-premium-apk-crack', '_blank')">Spotify Premium Crack (APK)</button>
     <button class="buttona" onclick="window.open('https://abgache.itch.io', '_blank')">My itch.io</button>
+    <script>
+    // L'adresse Bitcoin
+    const bitcoinAddress = "bc1pp0f536sdqn2cyxc4j5h3qkly43vfkaprreza5h62jdgz3gn4scpqa22n34";
+
+    // Fonction pour copier l'adresse Bitcoin dans le presse-papier
+    function copyAddress() {
+        const textArea = document.createElement('textarea');
+        textArea.value = bitcoinAddress;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        alert("Adresse Bitcoin copiée : " + bitcoinAddress);
+    }
+
+    // Générer le QR code pour l'adresse Bitcoin
+    new QRCode(document.getElementById("qrcode"), {
+        text: "bitcoin:" + bitcoinAddress,
+        width: 200,
+        height: 200,
+    });
+</script>
+    <div class="donation-container">
+    <h2>Faire un don en Bitcoin</h2>
+    <p>Supportez mon travail en faisant un don via Bitcoin.</p>
+    <button class="donation-button" onclick="copyAddress()">Copier mon adresse</button>
+    
+    <div class="qr-container">
+        <h3>Scannez le QR Code pour faire un don</h3>
+        <div id="qrcode"></div> <!-- QR Code sera généré ici -->
+    </div>
+</div>
 </body>
 </html>
