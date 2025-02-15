@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créateur de Sessions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input, button, select {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        button {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Créateur de Sessions</h1>
+
+<form id="sessionForm">
+    <label for="jour">Jour :</label>
+    <select id="jour" required>
+        <option value="Lundi">Lundi</option>
+        <option value="Mardi">Mardi</option>
+        <option value="Mercredi">Mercredi</option>
+        <option value="Jeudi">Jeudi</option>
+        <option value="Vendredi">Vendredi</option>
+        <option value="Samedi">Samedi</option>
+        <option value="Dimanche">Dimanche</option>
+    </select>
+
+    <label for="heureDebut">Heure de début :</label>
+    <input type="time" id="heureDebut" required>
+
+    <label for="heureFin">Heure de fin :</label>
+    <input type="time" id="heureFin" required>
+
+    <button type="button" onclick="ajouterSession()">Créer Session</button>
+</form>
+
+<h2>Emploi du Temps</h2>
+<table id="emploiDuTemps">
+    <thead>
+        <tr>
+            <th>Jour</th>
+            <th>Heure de Début</th>
+            <th>Heure de Fin</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Les sessions seront ajoutées ici -->
+    </tbody>
+</table>
+
+<button onclick="telechargerJSON()">Télécharger le fichier JSON</button>
+
+<script>
+    const webhookUrl = "https://discord.com/api/webhooks/1317559457131139174/N5sK7pGRGyS8re1TJXH4galgWlrQdEmeI3ObUk7rszsiu3icLut9Xu31ytWGUPV6_obK";
+    let sessions = []; // Tableau pour stocker les sessions
+
+    // Fonction pour ajouter une session
+    function ajouterSession() {
+        // Récupération des valeurs des champs
+        const jour = document.getElementById("jour").value;
+        const heureDebut = document.getElementById("heureDebut").value;
+        const heureFin = document.getElementById("heureFin").value;
+
+        if (!heureDebut || !heureFin) {
+            alert("Veuillez remplir tous les champs.");
+            return;
+        }
+
+        // Création de l'objet session
+        const session = {
+            jour: jour,
+            heureDebut: heureDebut,
+            heureFin: heureFin
+        };
+
+        // Ajout de la session au tableau
+        sessions.push(session);
+
+        // Ajout de la session dans le tableau HTML
+        const tableBody = document.getElementById("emploiDuTemps").querySelector("tbody");
+        const newRow = document.createElement("tr");
+        newRow.innerHTML = `
+            <td>${jour}</td>
+            <td>${heureDebut}</td>
+            <td>${heureFin}</td>
+        `;
+        tableBody.appendChild(newRow);
+
+        // Envoi du message au webhook Discord
+        const message = {
+            content: `||@everyone|| Session **${jour}** de **${heureDebut}** à **${heureFin}**`,
+        };
+
+        fetch(webhookUrl, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(message)
+        })
+        .then(response => {
+            if (response.ok) {
+                alert("Session ajoutée et message envoyé sur Discord !");
+            } else {
+                alert("Erreur lors de l'envoi du message au webhook Discord.");
+            }
+        })
+        .catch(error => {
+            console.error("Erreur :", error);
+            alert("Impossible de contacter le webhook.");
+        });
+
+        // Réinitialisation du formulaire
+        document.getElementById("sessionForm").reset();
+    }
+
+    // Fonction pour télécharger les sessions dans un fichier JSON
+    function telechargerJSON() {
+        // Création du contenu JSON avec les sessions ajoutées
+        const data = JSON.stringify(sessions, null, 4);
+
+        // Création d'un fichier téléchargeable
+        const blob = new Blob([data], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "info.json"; // Nom du fichier
+        a.click();
+
+        // Libération de l'objet URL
+        URL.revokeObjectURL(url);
+    }
+</script>
+
+</body>
+</html>
