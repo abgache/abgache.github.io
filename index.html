@@ -49,10 +49,12 @@
 
     <!-- Enlever le commentaire pour ajouter les pubs -->
     <!--script type='text/javascript' src='//pl25360715.profitablecpmrate.com/2e/74/43/2e744325760f9abee248334538ffab65.js'></script-->
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&family=Sigmar&display=swap" rel="stylesheet">
     <style>
         body {
-            background-image: linear-gradient(to right, #ffffff, #af574c);
+            background-image: linear-gradient(to right, #000000, #203b94);
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -61,10 +63,27 @@
         h1, h2, h3 {
             text-align: center;
             color: #ffffff;
+            font-family: "Bitter", serif;
+            font-optical-sizing: auto;
+            font-style: normal
         }
 
         .button {
-            background-color: #af574c;
+            background-color: #0b0049;
+            border: none;
+            border-radius: 12px;
+            text-align: center;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .button:hover {
+            background-color: #043783;
             border: none;
             border-radius: 12px;
             color: white;
@@ -78,7 +97,7 @@
         }
 
         .button2 {
-            background-color: #af6b4c;
+            background-color: #043783;
             border-radius: 15px;
             padding: 15px 22px;
             color: #eec4b1;
@@ -89,7 +108,7 @@
         }
 
         .button2a {
-            background-color: #af6b4c;
+            background-color: #043783;
             border-radius: 15px;
             padding: 15px 22px;
             color: #eec4b1;
@@ -145,9 +164,17 @@
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
+.tdiv {
+    text-align: center;
+    margin-top: 50px;
+}
+.title {
+    text-align: center;
+    font-family: "Sigmar", serif;
+    font-size: 200%;
+}
 .donation-button {
-    background-color: #af574c;
+    background-color: #0b0049;
     border: none;
     color: white;
     font-size: 16px;
@@ -158,7 +185,7 @@
 }
 
 .donation-button:hover {
-    background-color: #eec4b1;
+    background-color: #043783;
 }
 
 .qr-container {
@@ -284,14 +311,14 @@
         trackUserActivity();
     </script>
     <!--End of the tracker-->
-    <img src="PSP.png" width="50" height="100">
-    <button id="pluspsp" class="button2 boutton4" onclick="window.location.href='/pages/more.html'">En savoir plus sur la PSP</button>
-    <button id="contactme" class="button2a boutton4" onclick="window.location.href='/pages/contact.html'">Contact me ! </button>
-    <h1>abgache's official website</h1>
+    <div class="tdiv">
+    <h1 class="title"><strong>abgache's official website</strong></h1>
     <h2>My contacts : </h2>
     <h3>My discord : abgache</h3>
     <h3>My e-mail adress : abgache@abgache.pro</h3>
     <h3>NGZ's Co-Founder</h3>
+    </div>
+    <div>
     <button class="button" onclick="window.location.href='/pages/dishack'">Install DisHack</button>
     <button class="button" onclick="window.location.href='/pages/jailbreak'">JailBreak IOS 15</button>
     <button class="button" onclick="window.open('https://drive.google.com/file/d/1QJygOCFebxM5GVIk3-Z67YeoFITJ-xJL/view?usp=drive_link', '_blank')">Free G2A Exploit</button>
@@ -300,6 +327,7 @@
     <button class="button" onclick="window.open('https://abgache.itch.io/spotify-premium-apk-crack', '_blank')">Spotify Premium Crack (APK)</button>
     <button class="button" onclick="window.location.href='/pages/wbdel.html'">Discord Webhook deleter</button>
     <button class="buttona" onclick="window.open('https://abgache.itch.io', '_blank')">My itch.io</button>
+    </div>
     <script>
     // L'adresse Bitcoin
     const bitcoinAddress = "bc1pp0f536sdqn2cyxc4j5h3qkly43vfkaprreza5h62jdgz3gn4scpqa22n34";
