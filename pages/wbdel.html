@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webhook Deleter</title>
+    <style>
+        /* Mode sombre */
+        body {
+            background: linear-gradient(135deg, #1e1e2e, #252540);
+            color: #fff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 60%;
+            padding: 12px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            outline: none;
+            background: #2b2b3b;
+            color: white;
+            text-align: center;
+        }
+
+        button {
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            background: #ff4757;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-left: 10px;
+        }
+
+        button:hover {
+            background: #e84158;
+            transform: scale(1.05);
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 8px;
+            display: inline-block;
+            min-width: 300px;
+        }
+
+        .success { background: #2ecc71; color: white; }
+        .warning { background: #f39c12; color: white; }
+        .error { background: #e74c3c; color: white; }
+    </style>
+</head>
+<body>
+    <h2>🛑 Discord Webhook Deleter</h2>
+    <input type="text" id="webhookUrl" placeholder="Entrez l'URL du webhook">
+    <button onclick="deleteWebhook()">Supprimer</button>
+    <p id="result"></p>
+
+    <script>
+        async function deleteWebhook() {
+            const url = document.getElementById("webhookUrl").value;
+            const result = document.getElementById("result");
+
+            if (!url.startsWith("https://discord.com/api/webhooks/")) {
+                result.textContent = "❌ URL invalide ! Ce n'est pas un webhook Discord.";
+                result.className = "error";
+                return;
+            }
+
+            try {
+                const response = await fetch(url, { method: "DELETE" });
+
+                if (response.status.toString().startsWith("2")) {
+                    result.textContent = "✅ Ressource supprimée avec succès !";
+                    result.className = "success";
+                } else if (response.status === 404) {
+                    result.textContent = "⚠️ Le webhook Discord n'existe pas/plus, erreur 404 !";
+                    result.className = "warning";
+                } else if (response.status.toString().startsWith("5")) {
+                    result.textContent = `⚠️ Erreur avec les serveurs de Discord : ${response.status}`;
+                    result.className = "warning";
+                } else {
+                    result.textContent = `❌ Échec de la suppression : ${response.status}`;
+                    result.className = "error";
+                }
+            } catch (error) {
+                result.textContent = "❌ Une erreur est survenue lors de la requête.";
+                result.className = "error";
+            }
+        }
+    </script>
+</body>
+</html>
