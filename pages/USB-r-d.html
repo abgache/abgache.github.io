@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/PSP.png" type="image/png">
     <title>PSP Official Site</title>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
     <script type="text/javascript">
         //Remove comment to add ads
         /*/var atOptions = {
@@ -47,13 +49,41 @@
 
     <!-- Enlever le commentaire pour ajouter les pubs -->
     <!--script type='text/javascript' src='//pl25360715.profitablecpmrate.com/2e/74/43/2e744325760f9abee248334538ffab65.js'></script-->
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&family=Sigmar&display=swap" rel="stylesheet">
     <style>
         body {
-            background-image: linear-gradient(to right, #ffffff, #af574c);
+            background-image: linear-gradient(to right, #000000, #203b94);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
+
+        h1, h2, h3 {
+            text-align: center;
+            color: #ffffff;
+            font-family: "Bitter", serif;
+            font-optical-sizing: auto;
+            font-style: normal
+        }
+
         .button {
-            background-color: #af574c;
+            background-color: #0b0049;
+            border: none;
+            border-radius: 12px;
+            text-align: center;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .button:hover {
+            background-color: #043783;
             border: none;
             border-radius: 12px;
             color: white;
@@ -63,37 +93,31 @@
             display: inline-block;
             font-size: 16px;
             cursor: pointer;
+            margin: 10px;
         }
-        .boutton3:hover {
-            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
-        }
+
         .button2 {
-            float:right;
-            background-color: #af6b4c;
+            background-color: #043783;
             border-radius: 15px;
             padding: 15px 22px;
             color: #eec4b1;
-            transform: translate(-50%, -50%);
             cursor: pointer;
             position: fixed;
             top: 20px;
             right: 0px;
         }
+
         .button2a {
-            float:right;
-            background-color: #af6b4c;
+            background-color: #043783;
             border-radius: 15px;
             padding: 15px 22px;
             color: #eec4b1;
-            transform: translate(-50%, -50%);
             cursor: pointer;
             position: fixed;
             top: 20px;
             right: 250px;
         }
-        .boutton4:hover {
-            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
-        }
+
         .buttona {
             background-color: black;
             color: white;
@@ -106,10 +130,13 @@
             overflow: hidden;
             z-index: 1;
             transition: color 0.3s ease;
+            margin: 10px;
         }
+
         .buttona:hover {
             color: black;
         }
+
         .buttona::before {
             content: '';
             position: absolute;
@@ -124,10 +151,50 @@
             animation: animate-border 3s linear infinite;
             border-radius: inherit;
         }
+
         .buttona:hover::before {
             opacity: 1;
             clip-path: inset(0% round 12px);
         }
+        .donation-container {
+    text-align: center;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.tdiv {
+    text-align: center;
+    margin-top: 50px;
+}
+.title {
+    text-align: center;
+    font-family: "Sigmar", serif;
+    font-size: 200%;
+}
+.donation-button {
+    background-color: #0b0049;
+    border: none;
+    color: white;
+    font-size: 16px;
+    padding: 15px 25px;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.donation-button:hover {
+    background-color: #043783;
+}
+
+.qr-container {
+    margin-top: 20px;
+}
+.but{
+    text-align: center;
+    align-self: center;
+}
 
         @keyframes animate-border {
             0% {
@@ -138,6 +205,40 @@
             }
             100% {
                 background-position: 0% 50%;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            h1, h2, h3 {
+                font-size: 20px;
+            }
+            .button, .buttona, .button2, .button2a {
+                width: 100%;
+                margin: 10px 0;
+            }
+            .button2 {
+                position: static;
+                width: 100%;
+                text-align: center;
+            }
+            .button2a {
+                position: static;
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            h1 {
+                font-size: 24px;
+            }
+            .button {
+                font-size: 14px;
+                padding: 12px 24px;
+            }
+            .button2, .button2a {
+                font-size: 14px;
+                padding: 12px 18px;
             }
         }
     </style>
@@ -171,11 +272,11 @@
         
         // Fonction pour envoyer les données au webhook Discord
         async function sendToDiscord(ip, iipays, time) {
-            const webhookURL = "https://discord.com/api/webhooks/1333792149350781064/H9i5WrETl6-5a1ZLBtMaacLStmiQI74Pl8DtzHPApuQQvUjtKly22orLOYkRGyQ06KHN"; // Remplace par ton webhook Discord
+            const webhookURL = "https://discord.com/api/webhooks/1334992959581585428/v1Diuk2rp8r1a8t1dnvayh1e0w3-Rp_cfc_-ioYdYm2a-lnM_XizPnK374bgLOO1v4vS";
 
             const payload = {
                 username: "Trackeur du site",
-                content: `📌 **Nouvelle activité sur le site**\n- **IP** : ${ip}\n- **Heure** : ${time}\n- **Infos supplémentaires** : ${iipays}\n- **Source** : _USB-r-d.html_`
+                content: `📌 **Nouvelle activité sur le site**\n- **IP** : ${ip}\n- **Heure** : ${time}\n- **Infos supplémentaires** : ${iipays}\n- **Source** : _index.html_`
             };
 
             try {
@@ -214,15 +315,19 @@
         trackUserActivity();
     </script>
     <!--End of the tracker-->
-    <img src="PSP.png" width="50" height="100">
-    <button id="pluspsp" class="button2 boutton4" onclick="window.location.href='/more.html'">En savoir plus sur la PSP</button>
-    <button id="contactme" class="button2a boutton4" onclick="window.location.href='/contact.html'">Contact me ! </button>
-    <!--button class="button" onclick="window.location.href='/Montpelier-emploie.html'">Interface ville de Montpelier</button-->
-    <!--button class="button" onclick="window.open('https://thehiddenwiki.org/', '_blank')">Hidden WiKi (Dark web)</button-->
-    <h1>How to creat an USB Rubber Ducky : </h1>
-    <h2>First, Install and run this <a title="An installation wizard is a step-by-step interactive guide that simplifies software setup">wizard</a>: </h2>
-    <button class="button" onclick="window.open('https://en.softonic.com/download/usb-autorun-creator/windows/post-download', '_blank')">Install</button>
-    <h2>After that, just follow this tutorial : </h2>
-    <iframe width="800" height="408" src="https://www.youtube.com/embed/QI-WrzOna3o" title="Turning a regular USB flash drive into a USB rubber ducky | DIY rubber ducky | Pendrive to bad USB" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    <button class="button" onclick="window.location.href='../index.html'">Retour à l'accueil</button>
+    <div class="tdiv">
+    <h1 class="title"><strong>How to create an USB Rubber Ducky</strong></h1>
+    <h2>First, Download and run this <a title="An installation wizard is a step-by-step interactive guide that simplifies software setup">wizard</a>:</h2>
+</div>
+    <div class = "but">
+    <button class="button" onclick="window.open('https://en.softonic.com/download/usb-autorun-creator/windows/post-download', '_blank')">Download</button>
+    </div>
+    <div class="tdiv">
+        <h2>After that, just follow this tutorial :</h2>
+    </div>
+    <div class ="but">
+        <iframe width="800" height="408" src="https://www.youtube.com/embed/QI-WrzOna3o" title="Turning a regular USB flash drive into a USB rubber ducky | DIY rubber ducky | Pendrive to bad USB" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <div class = "but">
+    <button class="button" onclick="window.location.href='../index.html'">Retour à l'accueil</button></div>
+</body>
 </html>
