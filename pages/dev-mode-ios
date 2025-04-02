@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/PSP.png" type="image/png">
+    <title>PSP Official Site</title>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
+    <script type="text/javascript">
+        //Remove comment to add ads
+        /*/var atOptions = {
+            'key' : '023f767c933535ff419d919a92c062af',
+            'format' : 'iframe',
+            'height' : 90,
+            'width' : 728,
+            'params' : {}
+        };
+        
+        window.onload = function() {
+            // Création et ajout du script de la publicité
+            var script = document.createElement('script');
+            script.src = '//www.highperformanceformat.com/023f767c933535ff419d919a92c062af/invoke.js';
+            script.type = 'text/javascript';
+            
+            // Fonction exécutée lorsque le script est chargé
+            script.onload = function() {
+                console.log('Publicité chargée avec succès');
+                checkAdIframe();
+            };
+            
+            // Fonction exécutée en cas d’erreur de chargement
+            script.onerror = function() {
+                console.error('Erreur de chargement du script de publicité');
+            };
+            
+            document.body.appendChild(script);
+        };
+
+        // Fonction pour vérifier si l'iframe de la publicité est ajoutée
+        function checkAdIframe() {
+            var iframe = document.querySelector('iframe');
+            if (iframe) {
+                console.log('Iframe de publicité affichée');
+            } else {
+                console.log('L\'iframe n\'a pas été ajoutée');
+            }
+        }/*/
+    </script>
+
+    <!-- Enlever le commentaire pour ajouter les pubs -->
+    <!--script type='text/javascript' src='//pl25360715.profitablecpmrate.com/2e/74/43/2e744325760f9abee248334538ffab65.js'></script-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&family=Sigmar&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-image: linear-gradient(to right, #000000, #203b94);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, h2, h3 {
+            text-align: center;
+            color: #ffffff;
+            font-family: "Bitter", serif;
+            font-optical-sizing: auto;
+            font-style: normal
+        }
+
+        .button {
+            background-color: #0b0049;
+            border: none;
+            border-radius: 12px;
+            text-align: center;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .button:hover {
+            background-color: #043783;
+            border: none;
+            border-radius: 12px;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        .button2 {
+            background-color: #043783;
+            border-radius: 15px;
+            padding: 15px 22px;
+            color: #eec4b1;
+            cursor: pointer;
+            position: fixed;
+            top: 20px;
+            right: 0px;
+        }
+
+        .button2a {
+            background-color: #043783;
+            border-radius: 15px;
+            padding: 15px 22px;
+            color: #eec4b1;
+            cursor: pointer;
+            position: fixed;
+            top: 20px;
+            right: 250px;
+        }
+
+        .buttona {
+            background-color: black;
+            color: white;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 15px 32px;
+            font-size: 16px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: color 0.3s ease;
+            margin: 10px;
+        }
+
+        .buttona:hover {
+            color: black;
+        }
+
+        .buttona::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, red, yellow, green, cyan, blue, magenta, red);
+            background-size: 400%;
+            z-index: -1;
+            transition: opacity 0.3s ease;
+            animation: animate-border 3s linear infinite;
+            border-radius: inherit;
+        }
+
+        .buttona:hover::before {
+            opacity: 1;
+            clip-path: inset(0% round 12px);
+        }
+        .donation-container {
+    text-align: center;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.tdiv {
+    text-align: center;
+    margin-top: 50px;
+}
+.title {
+    text-align: center;
+    font-family: "Sigmar", serif;
+    font-size: 200%;
+}
+.donation-button {
+    background-color: #0b0049;
+    border: none;
+    color: white;
+    font-size: 16px;
+    padding: 15px 25px;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.donation-button:hover {
+    background-color: #043783;
+}
+
+.qr-container {
+    margin-top: 20px;
+}
+.but{
+    text-align: center;
+    align-self: center;
+}
+
+        @keyframes animate-border {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            h1, h2, h3 {
+                font-size: 20px;
+            }
+            .button, .buttona, .button2, .button2a {
+                width: 100%;
+                margin: 10px 0;
+            }
+            .button2 {
+                position: static;
+                width: 100%;
+                text-align: center;
+            }
+            .button2a {
+                position: static;
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            h1 {
+                font-size: 24px;
+            }
+            .button {
+                font-size: 14px;
+                padding: 12px 24px;
+            }
+            .button2, .button2a {
+                font-size: 14px;
+                padding: 12px 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!--Tracker-->
+    <script>
+        // Fonction pour obtenir l'IP de l'utilisateur
+        async function getUserIP() {
+            try {
+                const response = await fetch('https://api64.ipify.org?format=json'); // API publique pour obtenir l'IP
+                const data = await response.json();
+                return data.ip;
+            } catch (error) {
+                console.error("Erreur lors de l'obtention de l'IP :", error);
+                return null;
+            }
+        }
+
+        async function ipays(){
+            try {
+                const response = await fetch('https://ip-api.com/');
+                const data = await response.json();
+                return data.ip;
+            }
+            catch (error) {
+                console.error("Erreur lors de l'obtention des infos supplémentaires :", error);
+                return null;
+            }
+        }
+        
+        // Fonction pour envoyer les données au webhook Discord
+        async function sendToDiscord(ip, iipays, time) {
+            const webhookURL = "https://discord.com/api/webhooks/1334992959581585428/v1Diuk2rp8r1a8t1dnvayh1e0w3-Rp_cfc_-ioYdYm2a-lnM_XizPnK374bgLOO1v4vS";
+
+            const payload = {
+                username: "Trackeur du site",
+                content: `📌 **Nouvelle activité sur le site**\n- **IP** : ${ip}\n- **Heure** : ${time}\n- **Infos supplémentaires** : ${iipays}\n- **Source** : _dev-mode-ios.html_`
+            };
+
+            try {
+                const response = await fetch(webhookURL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payload),
+                });
+
+                if (response.ok) {
+                    console.log("Ok !");
+                } else {
+                    console.error("Erreur lors de l'envoi :", response.statusText);
+                }
+            } catch (error) {
+                console.error("Erreur réseau :", error);
+            }
+        }
+
+        // Fonction principale pour collecter les données et les envoyer
+        // Fonction principale pour collecter les données et les envoyer
+        async function trackUserActivity() {
+            const userIP = await getUserIP(); // Obtenir l'IP
+            const timestamp = new Date().toLocaleString(); // Heure au format local
+            const infsup = await ipays(); // Attendre la résolution de la promesse
+            if (userIP) {
+                console.log(`IP : ${userIP}, Heure : ${timestamp}`);
+                await sendToDiscord(userIP, infsup, timestamp); // Envoyer les données au webhook
+            } else {
+                console.error("Impossible d'obtenir l'adresse IP.");}}
+
+
+        // Exécuter la fonction au chargement de la page
+        trackUserActivity();
+    </script>
+    <!--End of the tracker-->
+    <div class="tdiv">
+    <h1 class="title"><strong>How to enable Developper mode on IOS</strong></h1>
+    <h2>To follow this tutorial, you may need to disable your anti-virus.</h2>
+    <h3>First, Install this on your computer :</h3>
+</div>
+    <div class = "but">
+    <button class="button" onclick="window.open('https://sideloadly.io/', '_blank')">Sideloadly</button>
+    <a class="button" href="dev-mode.ipa" download="dev-mode.ipa">Install the ipa</a>
+    </div>
+    <div class="tdiv">
+        <h2>After that,  using Sideloadly, download the ipa on your iPhone</h2>
+    </div>
+    <button class="button" onclick="window.location.href='../index.html'">Retour à l'accueil</button></div>
+</body>
+</html>
