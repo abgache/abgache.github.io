@@ -310,23 +310,33 @@
             } else {
                 console.error("Impossible d'obtenir l'adresse IP.");}}
 
-
         // Exécuter la fonction au chargement de la page
         trackUserActivity();
     </script>
     <!--End of the tracker-->
-    <div class="tdiv">
-    <h1 class="title"><strong>How to enable Developper mode on IOS</strong></h1>
-    <h2>To follow this tutorial, you may need to disable your anti-virus.</h2>
-    <h3>First, Install this on your computer :</h3>
-</div>
-    <div class = "but">
-    <button class="button" onclick="window.open('https://sideloadly.io/', '_blank')">Sideloadly</button>
-    <a class="button" href="dev-mode.ipa" download="dev-mode.ipa">Install the ipa</a>
+    <div class="but">
+        <button class="buttona"><a href="https://sideloadly.io" target="_blank">Télécharger Sideloadly</a></button>
+        <a class="button" href="dev-mode.ipa" download="dev-mode.ipa">Install the ipa</a>
     </div>
-    <div class="tdiv">
-        <h2>After that,  using Sideloadly, download the ipa on your iPhone</h2>
-    </div>
-    <button class="button" onclick="window.location.href='../index.html'">Retour à l'accueil</button></div>
+    <h1>Suivez ces étapes pour installer le fichier IPA sur votre iPhone :</h1>
+
+    <h2>1. Téléchargez et installez Sideloadly.</h2>
+    <p>Rendez-vous sur <a href="https://sideloadly.io" target="_blank">le site officiel de Sideloadly</a> et téléchargez la dernière version compatible avec votre système.</p>
+
+    <h2>2. Téléchargez l'IPA</h2>
+    <p>Vous pouvez télécharger le fichier IPA en cliquant sur <a href="https://mega.nz/file/dBJ33QjI#u_Uazt02yDlPxdMjEjGsFu1nU9_ApWl9B0KXvd3H7ok" target="_blank">ce lien</a>.</p>
+
+    <h2>3. Connectez votre appareil à Sideloadly</h2>
+    <p>Ouvrez Sideloadly et connectez votre iPhone via USB. Assurez-vous que votre appareil est reconnu par l'outil.</p>
+
+    <h2>4. Installez l'IPA</h2>
+    <p>Dans Sideloadly, choisissez l'IPA téléchargé et appuyez sur "Start". L'outil commencera à installer l'application sur votre iPhone.</p>
+
+    <h2>5. Autorisez l'application sur votre iPhone</h2>
+    <p>Une fois l'installation terminée, allez dans les réglages de votre iPhone, puis dans "Général" > "Gestion des appareils". Appuyez sur le profil de développeur et autorisez l'application.</p>
+
+    <h2>6. Profitez de l'application!</h2>
+    <p>L'application est maintenant installée et prête à être utilisée. Profitez-en!</p>
+
 </body>
 </html>
