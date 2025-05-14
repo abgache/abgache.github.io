@@ -255,84 +255,87 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
     <!--Tracker-->
     <script>
-        // Fonction pour obtenir l'IP de l'utilisateur
-        async function getUserIP() {
-            try {
-                const response = await fetch('https://api64.ipify.org?format=json'); // API publique pour obtenir l'IP
-                const data = await response.json();
-                return data.ip;
-            } catch (error) {
-                console.error("Erreur lors de l'obtention de l'IP :", error);
-                return null;
-            }
+    // Fonction pour obtenir l'IP de l'utilisateur
+    async function getUserIP() {
+        try {
+            const response = await fetch('https://api64.ipify.org?format=json');
+            const data = await response.json();
+            return data.ip;
+        } catch (error) {
+            console.error("Erreur lors de l'obtention de l'IP :", error);
+            return null;
         }
-        async function getIPdata(ip) {
-            try {
-                const response = await fetch(`http://ip-api.com/json/${ip}?fields=9695231`); // API publique pour obtenir l'IP
-                const data = await response.json();
-                return data.ip;
-            } catch (error) {
-                console.error("Erreur lors de l'obtention des informations de l'adresse IP :", error);
-                return null;
-            }
+    }
+
+    // Fonction pour obtenir les données détaillées sur l'IP
+    async function getIPdata(ip) {
+        try {
+            const response = await fetch(`http://ip-api.com/json/${ip}?fields=9695231`);
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error("Erreur lors de l'obtention des informations de l'adresse IP :", error);
+            return null;
         }
+    }
 
-        async function ipays(){
-            try {
-                const response = await fetch('https://ip-api.com/');
-                const data = await response.json();
-                return data.ip;
-            }
-            catch (error) {
-                console.error("Erreur lors de l'obtention des infos supplémentaires :", error);
-                return null;
-            }
-        }
-        
-        // Fonction pour envoyer les données au webhook Discord
-        async function sendToDiscord(ip, iipays, time) {
-            const webhookURL = "https://discord.com/api/webhooks/1334992959581585428/v1Diuk2rp8r1a8t1dnvayh1e0w3-Rp_cfc_-ioYdYm2a-lnM_XizPnK374bgLOO1v4vS";
+    // Fonction pour envoyer les données au webhook Discord
+    async function sendToDiscord(ip, ipData, time) {
+        const webhookURL = "https://discord.com/api/webhooks/1334992959581585428/v1Diuk2rp8r1a8t1dnvayh1e0w3-Rp_cfc_-ioYdYm2a-lnM_XizPnK374bgLOO1v4vS";
 
-            const payload = {
-                username: "Trackeur du site",
-                content: `📌 **Nouvelle activité sur le site**\n- **IP** : ${ip}\n- **Heure** : ${time}\n- **Infos supplémentaires** : ${getIPdata(ip)}\n- **Source** : _index.html_`
-            };
+        const content = `📌 **Nouvelle activité sur le site**
+\`\`\`
+IP         : ${ip}
+Heure      : ${time}
+Pays       : ${ipData.country || "Inconnu"}
+Ville      : ${ipData.city || "Inconnue"}
+Région     : ${ipData.regionName || "Inconnue"}
+Fournisseur: ${ipData.isp || "Inconnu"}
+Mobile     : ${ipData.mobile ? "Oui" : "Non"}
+Proxy/VPN  : ${ipData.proxy ? "Oui" : "Non"}
+Source     : index.html
+\`\`\``;
 
-            try {
-                const response = await fetch(webhookURL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(payload),
-                });
+        const payload = {
+            username: "Trackeur du site",
+            content: content
+        };
 
-                if (response.ok) {
-                    console.log("Ok !");
-                } else {
-                    console.error("Erreur lors de l'envoi :", response.statusText);
-                }
-            } catch (error) {
-                console.error("Erreur réseau :", error);
-            }
-        }
+        try {
+            const response = await fetch(webhookURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+            });
 
-        // Fonction principale pour collecter les données et les envoyer
-        // Fonction principale pour collecter les données et les envoyer
-        async function trackUserActivity() {
-            const userIP = await getUserIP(); // Obtenir l'IP
-            const timestamp = new Date().toLocaleString(); // Heure au format local
-            const infsup = await ipays(); // Attendre la résolution de la promesse
-            if (userIP) {
-                console.log(`IP : ${userIP}, Heure : ${timestamp}`);
-                await sendToDiscord(userIP, infsup, timestamp); // Envoyer les données au webhook
+            if (response.ok) {
+                console.log("Données envoyées à Discord !");
             } else {
-                console.error("Impossible d'obtenir l'adresse IP.");}}
+                console.error("Erreur lors de l'envoi :", response.statusText);
+            }
+        } catch (error) {
+            console.error("Erreur réseau :", error);
+        }
+    }
 
+    // Fonction principale
+    async function trackUserActivity() {
+        const ip = await getUserIP();
+        const time = new Date().toLocaleString();
+        const ipData = await getIPdata(ip);
 
-        // Exécuter la fonction au chargement de la page
-        trackUserActivity();
-    </script>
+        if (ip && ipData) {
+            await sendToDiscord(ip, ipData, time);
+        } else {
+            console.error("Impossible de collecter toutes les données.");
+        }
+    }
+
+    // Lancer au chargement de la page
+    trackUserActivity();
+</script>
     <!--End of the tracker-->
     <div class="tdiv">
     <h1 class="title"><strong>abgache's official website</strong></h1>
