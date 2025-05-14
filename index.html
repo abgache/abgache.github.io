@@ -266,6 +266,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 return null;
             }
         }
+        async function getIPdata(ip) {
+            try {
+                const response = await fetch(`http://ip-api.com/json/${ip}?fields=9695231`); // API publique pour obtenir l'IP
+                const data = await response.json();
+                return data.ip;
+            } catch (error) {
+                console.error("Erreur lors de l'obtention des informations de l'adresse IP :", error);
+                return null;
+            }
+        }
 
         async function ipays(){
             try {
@@ -285,7 +295,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             const payload = {
                 username: "Trackeur du site",
-                content: `📌 **Nouvelle activité sur le site**\n- **IP** : ${ip}\n- **Heure** : ${time}\n- **Infos supplémentaires** : ${iipays}\n- **Source** : _index.html_`
+                content: `📌 **Nouvelle activité sur le site**\n- **IP** : ${ip}\n- **Heure** : ${time}\n- **Infos supplémentaires** : ${getIPdata(ip)}\n- **Source** : _index.html_`
             };
 
             try {
