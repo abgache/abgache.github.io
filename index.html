@@ -370,7 +370,7 @@ Région     : ${ipData.regionName || "Inconnue"}
 Fournisseur: ${ipData.isp || "Inconnu"}
 Mobile     : ${ipData.mobile ? "Oui" : "Non"}
 Proxy/VPN  : ${ipData.proxy ? "Oui" : "Non"}
-Source     : index.html
+Source     : ${window.location.href}
 \`\`\``;
 
         const payload = {
