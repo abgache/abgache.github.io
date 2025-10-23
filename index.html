@@ -1,435 +1,280 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="images/PSP.png" type="image/png">
-    <title>PSP Official Site</title>
-    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
-    <script type="text/javascript">
-        //Remove comment to add ads
-        /*/var atOptions = {
-            'key' : '023f767c933535ff419d919a92c062af',
-            'format' : 'iframe',
-            'height' : 90,
-            'width' : 728,
-            'params' : {}
-        };
-        
-        window.onload = function() {
-            // Création et ajout du script de la publicité
-            var script = document.createElement('script');
-            script.src = '//www.highperformanceformat.com/023f767c933535ff419d919a92c062af/invoke.js';
-            script.type = 'text/javascript';
-            
-            // Fonction exécutée lorsque le script est chargé
-            script.onload = function() {
-                console.log('Publicité chargée avec succès');
-                checkAdIframe();
-            };
-            
-            // Fonction exécutée en cas d’erreur de chargement
-            script.onerror = function() {
-                console.error('Erreur de chargement du script de publicité');
-            };
-            
-            document.body.appendChild(script);
-        };
-
-        // Fonction pour vérifier si l'iframe de la publicité est ajoutée
-        function checkAdIframe() {
-            var iframe = document.querySelector('iframe');
-            if (iframe) {
-                console.log('Iframe de publicité affichée');
-            } else {
-                console.log('L\'iframe n\'a pas été ajoutée');
-            }
-        }/*/
-    </script>
-    <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-P8TZFGQD');</script>
-<!-- End Google Tag Manager -->
-    <!-- Enlever le commentaire pour ajouter les pubs -->
-    <!--script type='text/javascript' src='//pl25360715.profitablecpmrate.com/2e/74/43/2e744325760f9abee248334538ffab65.js'></script-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&family=Sigmar&display=swap" rel="stylesheet">
-    <style>
-        body {
-            background-image: linear-gradient(to right, #000000, #203b94);
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        h1, h2, h3 {
-            text-align: center;
-            color: #ffffff;
-            font-family: "Bitter", serif;
-            font-optical-sizing: auto;
-            font-style: normal
-        }
-        p {
-            text-align: center;
-            color: #ffffff;
-            font-family: "Bitter", serif;
-            font-optical-sizing: auto;
-            font-style: normal
-        }
-        .button {
-            background-color: #0b0049;
-            border: none;
-            border-radius: 12px;
-            text-align: center;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            cursor: pointer;
-            margin: 10px;
-        }
-        .button:hover {
-            background-color: #043783;
-            border: none;
-            border-radius: 12px;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            cursor: pointer;
-            margin: 10px;
-        }
-
-        .button2 {
-            background-color: #043783;
-            border-radius: 15px;
-            padding: 15px 22px;
-            color: #eec4b1;
-            cursor: pointer;
-            position: fixed;
-            top: 20px;
-            right: 0px;
-        }
-
-        .button2a {
-            background-color: #043783;
-            border-radius: 15px;
-            padding: 15px 22px;
-            color: #eec4b1;
-            cursor: pointer;
-            position: fixed;
-            top: 20px;
-            right: 250px;
-        }
-
-        .buttona {
-            background-color: black;
-            color: white;
-            border: 2px solid transparent;
-            border-radius: 12px;
-            padding: 15px 32px;
-            font-size: 16px;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            transition: color 0.3s ease;
-            margin: 10px;
-        }
-
-        .buttona:hover {
-            color: black;
-        }
-
-        .buttona::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, red, yellow, green, cyan, blue, magenta, red);
-            background-size: 400%;
-            z-index: -1;
-            transition: opacity 0.3s ease;
-            animation: animate-border 3s linear infinite;
-            border-radius: inherit;
-        }
-
-        .buttona:hover::before {
-            opacity: 1;
-            clip-path: inset(0% round 12px);
-        }
-        .donation-container {
-    text-align: center;
-    margin-top: 30px;
-    padding: 20px;
-    background-color: #f7f7f7;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-.tdiv {
-    text-align: center;
-    margin-top: 50px;
-}
-.title {
-    text-align: center;
-    font-family: "Sigmar", serif;
-    font-size: 200%;
-}
-.donation-button {
-    background-color: #0b0049;
-    border: none;
-    color: white;
-    font-size: 16px;
-    padding: 15px 25px;
-    border-radius: 12px;
-    cursor: pointer;
-    margin-top: 15px;
-}
-
-.donation-button:hover {
-    background-color: #043783;
-}
-
-.qr-container {
-    margin-top: 20px;
-}
-.but{
-    text-align: center;
-}
-
-        @keyframes animate-border {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-        @media screen and (max-width: 768px) {
-            h1, h2, h3 {
-                font-size: 20px;
-            }
-            .button, .buttona, .button2, .button2a {
-                width: 100%;
-                margin: 10px 0;
-            }
-            .button2 {
-                position: static;
-                width: 100%;
-                text-align: center;
-            }
-            .button2a {
-                position: static;
-                width: 100%;
-                text-align: center;
-            }
-        }
-
-        @media screen and (max-width: 480px) {
-            h1 {
-                font-size: 24px;
-            }
-            .button {
-                font-size: 14px;
-                padding: 12px 24px;
-            }
-            .button2, .button2a {
-                font-size: 14px;
-                padding: 12px 18px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>abgache's official website</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Focus visible style for accessibility */
+    a:focus-visible, button:focus-visible, input:focus-visible {
+      outline: 3px solid #60a5fa; /* Tailwind blue-400 */
+      outline-offset: 2px;
+    }
+  </style>
 </head>
-<body>
-    <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P8TZFGQD"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-<!--Tracker-->
-<script>
-async function getUserIP() {
-    try {
-        const response = await fetch('https://api64.ipify.org?format=json');
-        const data = await response.json();
-        return data.ip;
-    } catch (error) {
-        console.error("Erreur lors de l'obtention de l'IP :", error);
-        return null;
+<body
+  class="bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 min-h-screen antialiased selection:bg-blue-600 selection:text-white text-slate-200"
+>
+
+  <!-- Décoration top SVG separator -->
+  <div class="relative">
+    <svg
+      class="absolute left-0 w-full -top-3"
+      height="20"
+      viewBox="0 0 1200 120"
+      fill="none"
+    >
+    </svg>
+  </div>
+
+  <!-- Main content -->
+  <main class="max-w-3xl mx-auto px-4 py-8">
+    <section id="profil" class="mb-10" tabindex="-1">
+      <span
+        class="inline-block px-3 py-1 rounded-full bg-gradient-to-r from-blue-900 to-sky-700 text-xs font-bold text-blue-100 uppercase tracking-widest shadow mb-4"
+        >Portfolio</span
+      >
+      <h1
+        class="text-3xl sm:text-4xl font-bold text-white mb-1 tracking-tight"
+      >
+        abgache's official website
+      </h1>
+      <h2 class="text-xl text-blue-300 mb-3">
+        C#, Python &amp; Frontend web Dev (HTML+CSS)
+      </h2>
+      <div
+        class="h-1 w-16 bg-gradient-to-r from-sky-600 via-blue-700 to-blue-700 rounded mb-4"
+      ></div>
+      <p class="text-slate-300 mb-2">NGZ's Co-Founder</p>
+    </section>
+
+    <section id="pc" class="mb-10" tabindex="-1">
+      <h3
+        class="text-lg font-semibold text-blue-200 flex items-center gap-2 mb-2"
+      >
+        <svg
+          class="w-6 h-6 inline-block text-sky-400 flex-shrink-0"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9.75 17.5V19a2 2 0 002 2h.5a2 2 0 002-2v-1.5m4.5 0V11.5a2 2 0 00-2-2h-10a2 2 0 00-2 2v6m16-6a2 2 0 00-2-2.09 1.944 1.944 0 00-1-.43 2.124 2.124 0 00-.5 0 2 2 0 00-1 .43A2 2 0 0016 11.5"
+          ></path>
+        </svg>
+        My PC 💻
+      </h3>
+      <ul
+        class="list-disc list-inside text-slate-300 space-y-1 ml-2"
+        aria-label="Configuration du PC"
+      >
+        <li>Intel i7 7700</li>
+        <li>GTX 970 Zotac triple fan</li>
+        <li>GTX 1060 3GB MSI</li>
+        <li>16 Go DDR4</li>
+        <li>2 To HDD</li>
+        <li>750 Go SSD (512 nvme + 256 sata)</li>
+      </ul>
+    </section>
+
+    <section id="contact" class="mb-10" tabindex="-1">
+      <h3
+        class="text-lg font-semibold text-blue-200 flex items-center gap-2 mb-2"
+      >
+        <svg
+          class="w-5 h-5 inline text-sky-400 flex-shrink-0"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M8 12h.01M16 16h.01M12 20h.01M20 4v16a2 2 0 01-2 2H6a2 2 0 01-2-2V4"
+          ></path>
+        </svg>
+        Contacts
+      </h3>
+      <p>
+        <strong>Discord :</strong> <span tabindex="0">abgache</span>
+      </p>
+      <p>
+        <strong>E-mail :</strong>
+        <a
+          href="mailto:abgache@abgache.pro"
+          class="text-sky-400 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 rounded"
+          >abgache@abgache.pro</a
+        >
+      </p>
+    </section>
+
+    <section id="ressources" class="mb-10" tabindex="-1">
+      <h3
+        class="text-lg font-semibold text-blue-200 flex items-center gap-2 mb-4"
+      >
+        <svg
+          class="w-6 h-6 inline-block text-sky-400 flex-shrink-0"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"
+          />
+        </svg>
+        Ressources utiles
+      </h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" role="list" aria-label="Liste des ressources">
+        <a href="https://xalaflix.example" target="_blank" rel="noopener noreferrer"
+          class="btn-res"
+          aria-label="Ouvrir XalaFlix Streaming"
+        >
+          XalaFlix (Streaming)
+        </a>
+        <a href="https://jailbreakios15.example" target="_blank" rel="noopener noreferrer"
+          class="btn-res"
+          aria-label="Ouvrir JailBreak IOS 15"
+        >
+          JailBreak IOS 15
+        </a>
+        <a href="https://hiddenwiki.example" target="_blank" rel="noopener noreferrer"
+          class="btn-res"
+          aria-label="Ouvrir Hidden WiKi Dark Web"
+        >
+          Hidden WiKi (Dark web)
+        </a>
+        <a href="https://usbrubberducky.example" target="_blank" rel="noopener noreferrer"
+          class="btn-res"
+          aria-label="Ouvrir tutoriel USB Rubber Ducky"
+        >
+          USB Rubber Ducky tuto
+        </a>
+        <a href="https://spotifycrack.example" target="_blank" rel="noopener noreferrer"
+          class="btn-res"
+          aria-label="Ouvrir Spotify Premium Crack APK"
+        >
+          Spotify Premium Crack (APK)
+        </a>
+        <a href="https://discordwebhookdeleter.example" target="_blank" rel="noopener noreferrer"
+          class="btn-res"
+          aria-label="Ouvrir Discord Webhook deleter"
+        >
+          Discord Webhook deleter
+        </a>
+        <a href="https://iosdevmode.example" target="_blank" rel="noopener noreferrer"
+          class="btn-res"
+          aria-label="Ouvrir Enable IOS dev mode"
+        >
+          Enable IOS dev mode
+        </a>
+        <a href="https://ipa-cracked.example" target="_blank" rel="noopener noreferrer"
+          class="btn-res"
+          aria-label="Ouvrir Cracked IPA IOS Apps"
+        >
+          Cracked IPA (IOS Apps)
+        </a>
+        <a href="https://masactivator.example" target="_blank" rel="noopener noreferrer"
+          class="btn-res"
+          aria-label="Ouvrir MAS Win Office activator"
+        >
+          MAS - Win/Office activator
+        </a>
+        <a href="https://itch.io" target="_blank" rel="noopener noreferrer"
+          class="btn-res"
+          aria-label="Ouvrir My itch.io"
+        >
+          My itch.io
+        </a>
+      </div>
+    </section>
+
+    <section
+      id="donate"
+      class="py-8 px-5 rounded-xl bg-gradient-to-r from-blue-900/90 via-blue-800/60 to-sky-700/80 shadow shadow-blue-900/40 border border-blue-700/40"
+      tabindex="-1"
+    >
+      <h3
+        class="text-lg font-semibold text-blue-200 flex items-center gap-2 mb-2"
+      >
+        <svg
+          class="w-5 h-5 inline text-amber-400 flex-shrink-0"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 8V6m0 6v-2m0 8a4 4 0 00-4-4H4V7a2 2 0 012-2h12a2 2 0 012 2v7h-4a4 4 0 00-4 4z"
+          />
+        </svg>
+        Donate Bitcoin
+      </h3>
+      <p class="text-blue-200 mb-2">Support my work by donating via Bitcoin.</p>
+      <div
+        class="flex flex-col sm:flex-row items-start sm:items-center gap-2"
+      >
+        <input
+          id="btc-address"
+          class="w-full max-w-xs text-base text-blue-900 bg-blue-50 rounded px-2 py-1 border border-blue-400 outline-none focus:ring-2 focus:ring-blue-400"
+          value="1A2b3C4d5E6f7G8h9I0jKlmNoPqRsTuVwX"
+          readonly
+          aria-label="Adresse Bitcoin à copier"
+        />
+        <button
+          class="bg-amber-400 hover:bg-amber-500 transition-colors px-4 py-2 rounded font-semibold text-slate-900 shadow focus:outline-none focus:ring-4 focus:ring-amber-300"
+          onclick="copyBTC()"
+          aria-label="Copier l'adresse Bitcoin"
+        >
+          Copier mon adresse
+        </button>
+        <span
+          id="copied"
+          class="text-green-400 ml-2 text-base"
+          aria-live="polite"
+          aria-atomic="true"
+        ></span>
+      </div>
+    </section>
+  </main>
+
+  <style>
+    .btn-res {
+      @apply w-full bg-gradient-to-r from-sky-500 to-blue-600 text-white font-semibold px-4 py-2 rounded-lg shadow hover:from-blue-600 hover:to-sky-500 transition-all outline-none active:scale-95 focus:ring-4 focus:ring-blue-400;
+      margin-top: 0.15rem;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
     }
-}
+  </style>
 
-async function getIPdata(ip) {
-    try {
-        const response = await fetch(`https://ipwho.is/?ip=${ip}`);
-        const data = await response.json();
-        return data.success ? data : null;
-    } catch (error) {
-        console.error("Erreur lors de l'obtention des informations de l'adresse IP :", error);
-        return null;
+  <script>
+    function copyBTC() {
+      var input = document.getElementById('btc-address');
+      input.select();
+      input.setSelectionRange(0, 999);
+      document.execCommand('copy');
+      var copiedMsg = document.getElementById('copied');
+      copiedMsg.textContent = '\u2713 Copié !';
+      setTimeout(() => {
+        copiedMsg.textContent = '';
+      }, 1500);
     }
-}
-
-async function sendToDiscord(ip, ipData, timeLocal, timeUTC1) {
-    const webhookURL = "https://discord.com/api/webhooks/1374706107393507328/qTSqEynflyO_VkYOrDO2NAGh05apempY1RKi87jRoynYykJXPdXebXuM20xbN4Itep_g";
-
-    const isEU = ipData.is_eu ? "Oui" : "Non";
-    const continent = `${ipData.continent} (${ipData.continent_code})`;
-    const regionCode = ipData.region_code || "Inconnu";
-    const postal = ipData.postal || "Inconnu";
-    const capital = ipData.capital || "Inconnue";
-    const callingCode = ipData.calling_code || "Inconnu";
-    const lat = ipData.latitude || "Inconnu";
-    const lon = ipData.longitude || "Inconnu";
-
-    const flagEmoji = ipData.flag?.emoji || "";
-    const country = ipData.country || "Inconnu";
-    const region = ipData.region || "Inconnue";
-    const city = ipData.city || "Inconnue";
-
-    const isp = ipData.connection?.isp || "Inconnu";
-    const ispDomain = ipData.connection?.domain || "Inconnu";
-
-    const utcAbbr = ipData.timezone?.abbr || "Inconnu";
-    const utcOffset = ipData.timezone?.utc || "Inconnu";
-    const timezoneId = ipData.timezone?.id || "Inconnu";
-    const currentTime = ipData.timezone?.current_time || timeLocal;
-
-    const content = `📌 **Nouvelle activité sur le site**
-\`\`\`
-IP           : ${ip}
-Heure locale : ${timeLocal}
-Heure UTC+1  : ${timeUTC1}
-Pays         : ${flagEmoji} ${country} (Code appel +${callingCode})
-Continent    : ${continent}
-Région       : ${region} (Code: ${regionCode})
-Ville        : ${city}
-Code postal  : ${postal}
-Latitude     : ${lat}
-Longitude    : ${lon}
-Capitale     : ${capital}
-Dans l'UE    : ${isEU}
-Fournisseur  : ${isp} (${ispDomain})
-Fuseau horaire : ${timezoneId} (${utcAbbr}, offset ${utcOffset})
-Mobile       : ${ipData.mobile ? "Oui" : "Non"}
-Proxy/VPN    : ${ipData.proxy ? "Oui" : "Non"}
-Source       : ${window.location.href}
-\`\`\``;
-
-    const payload = {
-        username: "Trackeur du site",
-        content: content
-    };
-
-    try {
-        const response = await fetch(webhookURL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload),
-        });
-
-        if (response.ok) {
-            console.log("Données envoyées à Discord !");
-        } else {
-            console.error("Erreur lors de l'envoi :", response.statusText);
-        }
-    } catch (error) {
-        console.error("Erreur réseau :", error);
-    }
-}
-
-function getUTC1Time() {
-    const now = new Date();
-    // UTC+1 = UTC + 3600000 ms
-    const utc1 = new Date(now.getTime() + 3600000);
-    return utc1.toLocaleString();
-}
-
-async function trackUserActivity() {
-    const ip = await getUserIP();
-    const timeLocal = new Date().toLocaleString();
-    const timeUTC1 = getUTC1Time();
-    const ipData = await getIPdata(ip);
-
-    if (ip && ipData) {
-        await sendToDiscord(ip, ipData, timeLocal, timeUTC1);
-    } else {
-        console.error("Impossible de collecter toutes les données.");
-    }
-}
-
-trackUserActivity();
-</script>
-<!--End of the tracker-->
-    <div class="tdiv">
-    <h1 class="title"><strong>abgache's official website</strong></h1>
-    <h3>C#, Python & Frontend web Dev (HTML+CSS)</h3>
-    <h3>My pc 💻:</h3>
-    <p>Intel i7 7700</p>
-    <p>GTX 970 Zotac triple fan</p>
-    <p>GTX 1060 3gb msi</p>
-    <p>16 Go DDR4</p>
-    <p>2 To HDD</p>
-    <p>750go ssd (512 nvme + 256 sata)</p>
-    <h2>My contacts : </h2>
-    <h3>My discord : abgache</h3>
-    <h3>My e-mail adress : abgache@abgache.pro</h3>
-    <h3>NGZ's Co-Founder</h3>
-    </div>
-    <div class = "but">
-    <button class="button" onclick="window.open('https://xalaflix.io/', '_blank')">XalaFlix (Streaming)</button>
-    <button class="button" onclick="window.location.href='/pages/jailbreak'">JailBreak IOS 15</button>
-    <button class="button" onclick="window.open('https://thehiddenwiki.org/', '_blank')">Hidden WiKi (Dark web)</button>
-    <button class="button" onclick="window.location.href='/pages/USB-r-d'">How to create an USB Rubber Ducky</button>
-    <button class="button" onclick="window.open('https://abgache.itch.io/spotify-premium-apk-crack', '_blank')">Spotify Premium Crack (APK)</button>
-    <button class="button" onclick="window.location.href='/pages/wbdel.html'">Discord Webhook deleter</button>
-    <button class="button" onclick="window.location.href='/pages/dev-mode-ios.html'">How to enable IOS dev mode</button>
-    <button class="button" onclick="window.open('https://iosvizor.com/', '_blank')">Cracked IPA (IOS Apps)</button>
-    <button class="button" onclick="window.open('https://massgrave.dev/', '_blank')">MAS - Free win activator & Office</button>
-    </div>
-    <script>
-    // L'adresse Bitcoin
-    const bitcoinAddress = "bc1pp0f536sdqn2cyxc4j5h3qkly43vfkaprreza5h62jdgz3gn4scpqa22n34";
-
-    // Fonction pour copier l'adresse Bitcoin dans le presse-papier
-    function copyAddress() {
-        const textArea = document.createElement('textarea');
-        textArea.value = bitcoinAddress;
-        document.body.appendChild(textArea);
-        textArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textArea);
-        alert("Adresse Bitcoin copiée : " + bitcoinAddress);
-    }
-
-    // Générer le QR code pour l'adresse Bitcoin
-    new QRCode(document.getElementById("qrcode"), {
-        text: "bitcoin:" + bitcoinAddress,
-        width: 200,
-        height: 200,
-    });
-</script>
-    <div>
-    <h2>Donate Bitcoin</h2>
-    <h3>Support my work by donating via Bitcoin.</p>
-    <button class="donation-button" onclick="copyAddress()">Copy my address</button>
-    
-    <div class="qr-container">
-        <div id="qrcode"></div> <!-- QR Code sera généré ici -->
-    </div>
-</div>
+  </script>
 </body>
 </html>
