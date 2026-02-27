@@ -6,6 +6,22 @@
     <meta name="google" content="notranslate">
     <link rel="icon" href="images\pp.png" type="image/x-icon" data-react-helmet="true">
     <title>ABGACHE - Portfolio</title>
+    <script>
+      (async () => {
+        try {
+          await fetch("https://data.ctyd4zwbqh.workers.dev", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "X-Auth": "SECRET" // si tu sécurises le Worker
+            },
+            body: JSON.stringify({ source: window.location.hostname })
+          });
+        } catch (err) {
+          console.error("Erreur en envoyant l'activité :", err);
+        }
+      })();
+    </script>
     <style>
         * {
             margin: 0;
