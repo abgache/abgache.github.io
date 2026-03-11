@@ -1,0 +1,53 @@
+name: Discord Logger
+
+# Écoute tous les événements
+on:
+  push:
+  release:
+  issues:
+  pull_request:
+  workflow_dispatch: # permet de tester manuellement
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Discord message
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        run: |
+          # Détecte le type d'événement
+          EVENT="${GITHUB_EVENT_NAME}"
+
+          # JSON de base
+          EMBED="{\"username\": \"GitHub Logger\", \"embeds\": [{\"color\": 5814783}]}"
+          
+          # Selon l'événement
+          if [ "$EVENT" = "push" ]; then
+            DESCRIPTION="Repo: **${GITHUB_REPOSITORY}**\\nAuteur: **${GITHUB_ACTOR}**\\nCommit: \`${GITHUB_SHA}\`"
+            TITLE="📦 Nouveau push"
+          elif [ "$EVENT" = "release" ]; then
+            DESCRIPTION="Repo: **${GITHUB_REPOSITORY}**\nAuteur: **${GITHUB_ACTOR}**\nRelease: **${GITHUB_REF##*/}**"
+            TITLE="🏷 Nouvelle release"
+          elif [ "$EVENT" = "issues" ]; then
+            DESCRIPTION="Repo: **${GITHUB_REPOSITORY}**\nAuteur: **${GITHUB_ACTOR}**\nIssue: **${{ github.event.issue.title }}**"
+            TITLE="❗ Nouvelle issue"
+          elif [ "$EVENT" = "pull_request" ]; then
+            DESCRIPTION="Repo: **${GITHUB_REPOSITORY}**\nAuteur: **${GITHUB_ACTOR}**\nPR: **${{ github.event.pull_request.title }}**"
+            TITLE="🔀 Nouvelle PR"
+          else
+            DESCRIPTION="Événement: $EVENT"
+            TITLE="📝 Test / Autre événement"
+          fi
+
+          # Construire le JSON final
+          PAYLOAD=$(jq -n \
+            --arg title "$TITLE" \
+            --arg desc "$DESCRIPTION" \
+            '{"username":"GitHub Logger","embeds":[{"title":$title,"description":$desc,"color":5814783}]}'
+          )
+
+          # Envoie sur Discord
+          curl -H "Content-Type: application/json" \
+               -d "$PAYLOAD" \
+               $DISCORD_WEBHOOK
