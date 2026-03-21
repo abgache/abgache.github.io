@@ -10,8 +10,15 @@
     (async () => {
       try {
           const params = new URLSearchParams(window.location.search);
-        const deviceInfo = {platform: navigator.platform,userAgent: navigator.userAgent,language: navigator.language,timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,cores: navigator.hardwareConcurrency || "Unknown",memoryGB: navigator.deviceMemory || "Unknown",screenResolution: `${screen.width}x${screen.height}`,Source: params.get("src") || "Unknown",
-      viewport: `${window.innerWidth}x${window.innerHeight}`,
+        const deviceInfo = {platform: navigator.platform,
+                            userAgent: navigator.userAgent,
+                            language: navigator.language,
+                            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                            cores: navigator.hardwareConcurrency || "Unknown",
+                            memoryGB: navigator.deviceMemory || "Unknown",
+                            screenResolution: `${screen.width}x${screen.height}`,
+                            source_deviceInfo: params.get("src") || "Unknown",
+                            viewport: `${window.innerWidth}x${window.innerHeight}`,
       gpu: (() => {
         try {
           const canvas = document.createElement("canvas");
