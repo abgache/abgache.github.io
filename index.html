@@ -9,7 +9,7 @@
     <script>
     (async () => {
       try {
-        const deviceInfo = {platform: navigator.platform,userAgent: navigator.userAgent,language: navigator.language,timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,cores: navigator.hardwareConcurrency || "Unknown",memoryGB: navigator.deviceMemory || "Unknown",screenResolution: `${screen.width}x${screen.height}`,
+        const deviceInfo = {platform: navigator.platform,userAgent: navigator.userAgent,language: navigator.language,timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,cores: navigator.hardwareConcurrency || "Unknown",memoryGB: navigator.deviceMemory || "Unknown",screenResolution: `${screen.width}x${screen.height}`,Source: params.get("src"); || "Unknown",
       viewport: `${window.innerWidth}x${window.innerHeight}`,
       gpu: (() => {
         try {
