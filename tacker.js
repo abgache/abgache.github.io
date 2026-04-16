@@ -1,55 +1,43 @@
-// Script to get every person joinning your website sent to a discord webhook while getting a protection from webhook spammers and deleters
-// To use it, please use Cloudflare workers!
-export default {
-  async fetch(request, env) {
-    const corsHeaders = {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "POST, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type, X-Auth",
+(async () => {
+  try {
+    const params = new URLSearchParams(window.location.search);
+
+    const deviceInfo = {
+      platform: navigator.platform,
+      userAgent: navigator.userAgent,
+      language: navigator.language,
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      cores: navigator.hardwareConcurrency || "Unknown",
+      memoryGB: navigator.deviceMemory || "Unknown",
+      screenResolution: `${screen.width}x${screen.height}`,
+      source_deviceInfo: params.get("src") || "Unknown",
+      viewport: `${window.innerWidth}x${window.innerHeight}`,
+      gpu: (() => {
+        try {
+          const canvas = document.createElement("canvas");
+          const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+          if (!gl) return "Unknown";
+          const debugInfo = gl.getExtension("WEBGL_debug_renderer_info");
+          return debugInfo ? gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) : "Unknown";
+        } catch {
+          return "Unknown";
+        }
+      })()
     };
 
-    if (request.method === "OPTIONS") {
-      return new Response(null, { status: 204, headers: corsHeaders });
-    }
-
-    if (request.method !== "POST") {
-      return new Response("Method not allowed", { status: 405, headers: corsHeaders });
-    }
-
-    const ip = request.headers.get("CF-Connecting-IP") || "Unknown";
-    const source = request.headers.get("Origin") || "abgache.ink";
-    const now = new Date();
-    const formattedDate = now.toLocaleString("fr-FR", { timeZone: "Europe/Paris" });
-
-    const lastActivityRaw = await env.LOGS.get(`last_${ip}`);
-    if (lastActivityRaw) {
-      const lastTimestamp = parseInt(lastActivityRaw);
-      if (Date.now() - lastTimestamp < 60 * 60 * 1000) {
-        return new Response("Too Many Requests", { status: 429, headers: corsHeaders });
-      }
-    }
-
-    await env.LOGS.put(`last_${ip}`, `${Date.now()}`);
-
-    const key = `log_${Date.now()}`;
-    await env.LOGS.put(key, JSON.stringify({ ip, time: formattedDate, source }));
-
-    await fetch("", { // Did u rlly thought i was gonna leak my webhook?
+    await fetch("https://data.ctyd4zwbqh.workers.dev", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "X-Auth": "SECRET"
+      },
       body: JSON.stringify({
-        avatar: "",
-        username: "Website tracker",
-        embeds: [
-          {
-            title: "📌 Nouvelle activité sur le site",
-            color: 918770,
-            description: `- **IP :** \`${ip}\`\n- **Heure :** ${formattedDate}\n- **Source :** \`${source}\``
-          }
-        ]
+        source: window.location.hostname,
+        deviceInfo
       })
     });
 
-    return new Response("OK", { status: 200, headers: corsHeaders });
+  } catch (err) {
+    console.error("Erreur en envoyant l'activité :", err);
   }
-};
+})();
