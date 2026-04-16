@@ -24,7 +24,6 @@
         }
       })()
     };
-
     await fetch("https://data.ctyd4zwbqh.workers.dev", {
       method: "POST",
       headers: {
